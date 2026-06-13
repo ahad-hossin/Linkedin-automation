@@ -116,9 +116,15 @@ async function geminiPolish(text, instruction) {
   const keys = store.geminiKeys;
   if (!keys.length) throw new Error("Add at least one Gemini API key in Settings to use Polish / Translate.");
   const prompt =
-`Rewrite the text below as a polished, professional LinkedIn post in English (translate first if it is in another language). Keep every fact exactly as given — invent nothing.
+`Rewrite the text below into the BEST possible LinkedIn post in English (translate first if it is in another language). Keep every fact exactly as given — invent nothing.
 
-Structure: a strong hook on line 1 that works alone above the fold; blank-line-separated short paragraphs (1-3 sentences); professional but human tone; one closing question; 3-5 hashtags on the final line. 120-220 words. No clickbait or hype words ("game-changer", "revolutionary").
+Apply 2026 LinkedIn best practices:
+- LINE 1 is the hook — only ~140 characters show on mobile before "…see more", so it must stop the scroll on its own. Lead with the most striking number, a counterintuitive finding, an uncomfortable industry truth, or the question practitioners are already asking. Never open with "I'm excited"/"Thrilled to share", a definition, or generic context. No hype words ("game-changer", "revolutionary") and no clickbait.
+- LINE 2 re-hooks: one line that deepens the stakes so the reader expands the post.
+- Then 3-6 short paragraphs (1-2 sentences each, ~12-18 words per sentence), every paragraph separated by a BLANK LINE — heavy white space, easy to skim on a phone. Make it save-worthy: concrete, specific, useful.
+- Professional, confident, human tone; 0-1 emoji. Credit the source by name; keep any URL OUT of the body (LinkedIn suppresses outbound links).
+- End with ONE specific question inviting practitioners to comment (not a lazy "Thoughts?").
+- Final line: 3-5 hashtags mixing broad reach and niche. Target 1,300-2,000 characters; short sentences.
 ${instruction ? "Extra instruction from the author: " + instruction + "\n" : ""}
 TEXT:
 ${text}`;
@@ -174,15 +180,19 @@ function renderList() {
     </div>`).join("");
 
   app().innerHTML = `
-    <div class="filters">${topicChips}<span class="spacer"></span>
+    <div class="filters">${topicChips}</div>
+    <div class="gen-bar">
+      <input id="gen-url" class="gen-url" type="text"
+        placeholder="Paste an article or paper URL to cover it specifically (optional)" />
       <button id="gen-btn" class="btn primary">⚡ Generate now</button>
     </div>
     <div class="filters">${statusChips}</div>
     ${items.length ? `<div class="grid">${cards}</div>`
       : `<div class="empty"><h2>No posts yet</h2>
-         <p>Click <b>Generate now</b>, or wait for the hourly run. Drafts appear here for review.</p></div>`}`;
+         <p>Click <b>Generate now</b> (or paste a link to cover), or wait for the hourly run.</p></div>`}`;
 
   document.getElementById("gen-btn").onclick = triggerGenerate;
+  document.getElementById("gen-url").addEventListener("keydown", e => { if (e.key === "Enter") triggerGenerate(); });
 
   app().querySelectorAll(".chip[data-topic]").forEach(c =>
     c.onclick = () => { state.filterTopic = c.dataset.topic; renderList(); });
@@ -532,12 +542,18 @@ async function triggerGenerate() {
   if (!keys.length && !store.groq) {
     toast("Add a Gemini or Groq key in Settings first", "err"); openSettings(); return;
   }
+  const urlEl = document.getElementById("gen-url");
+  const url = urlEl ? urlEl.value.trim() : "";
+  if (url && !/^https?:\/\//i.test(url)) { toast("That doesn't look like a URL (needs http/https)", "err"); return; }
   try {
     await dispatchWorkflow("generate.yml", {
       gemini_keys: keys.join(","),
       groq_key: store.groq,
+      url,
     });
-    toast("Generating… new drafts arrive in ~1 min. Hit ↻ Refresh.", "ok");
+    toast(url ? "Covering your link… draft arrives in ~1 min. Hit ↻ Refresh."
+              : "Generating… new drafts arrive in ~1 min. Hit ↻ Refresh.", "ok");
+    if (urlEl) urlEl.value = "";
   } catch (e) { toast(e.message, "err"); }
 }
 

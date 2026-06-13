@@ -166,6 +166,17 @@ main { max-width: 1500px; margin: 0 auto; padding: 26px 24px 64px; }
 .filters + .filters .chip.active { background: var(--accent); border-color: var(--accent); }
 .spacer { flex: 1; }
 
+/* ------------------------------------------------------------- generate bar */
+.gen-bar { display: flex; gap: 10px; margin: 4px 0 14px; }
+.gen-url {
+  flex: 1; min-width: 0; font: inherit; font-size: 14px;
+  padding: 10px 14px; border: 1px solid var(--line); border-radius: var(--pill, 999px);
+  background: var(--surface); color: var(--ink);
+}
+.gen-url:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px rgba(10,102,194,.15); }
+.gen-bar .btn { white-space: nowrap; }
+@media (max-width: 600px) { .gen-bar { flex-direction: column; } }
+
 /* ----------------------------------------------------------------- cards */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(316px, 1fr)); gap: 18px; }
 .card {

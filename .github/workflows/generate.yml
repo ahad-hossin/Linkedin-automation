@@ -15,6 +15,10 @@ on:
         description: "Groq API key (optional fallback)"
         required: false
         default: ""
+      url:
+        description: "Cover this specific article/paper URL (optional; blank = auto-discover)"
+        required: false
+        default: ""
   schedule:
     - cron: "5 * * * *"
 
@@ -54,6 +58,7 @@ jobs:
           GH_MODELS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAX_POSTS_PER_RUN: ${{ vars.MAX_POSTS_PER_RUN || '2' }}
           MAX_PENDING_DRAFTS: ${{ vars.MAX_PENDING_DRAFTS || '30' }}
+          COVER_URL: ${{ github.event.inputs.url }}
         run: python -m src.main generate
 
       - name: Commit new drafts + state

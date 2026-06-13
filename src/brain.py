@@ -127,17 +127,25 @@ You produce TWO things for the item below: (A) the on-image carousel slide text,
 - summary (article): the second-punch detail in 1-2 sentences.
 - details: 3-7 short standalone paragraphs telling the fuller story (what/who/numbers/why it matters/what's next). They auto-flow onto the carousel's story slides — do NOT add slide headings. Most important facts first. For a research paper: method (simulator study, field test, dataset, N participants if given), main finding, one limitation/open question. Keep each paragraph phone-readable.
 
-(B) LinkedIn CAPTION (post_text) — structure rules (follow exactly):
-- Line 1: a strong, specific hook — the most striking finding, number or tension in one sentence (max ~140 chars). It must work alone, because it's all people see before "...see more". Never start with "I'm excited" or "Thrilled to share".
-- Blank line, then 2-4 SHORT paragraphs (1-3 sentences each, separated by blank lines): what was done or announced, the key result with concrete numbers where available, and why it matters for the field (safety, training, design, policy).
-- Professional but human tone. First-person observation is welcome ("What stands out to me is..."). At most 1-2 emojis, only if natural; zero is fine.
-- Credit the source by name in the text (e.g. "New research from TU Delft, published on arXiv" or "according to Road to VR"). Do NOT paste the URL into the text — the link is attached separately.
-- End the body with ONE short question that invites discussion from practitioners.
-- Final line: 3-5 hashtags mixing reach and niche (e.g. #VirtualReality #RoadSafety #DrivingSimulation #ADAS #HumanFactors).
-- Total length 120-220 words.
+(B) LinkedIn CAPTION (post_text) — write the BEST possible LinkedIn post for a professional audience, applying 2026 LinkedIn best practices. FACTS ONLY: never invent a statistic, quote, anecdote or personal story; every claim must come from the material below.
 
-For research papers: state that it is a study/paper, what method was used (simulator study, field test, dataset, survey, N participants if given), the main finding, and one limitation or open question if the abstract suggests one.
-For news: what happened, who is behind it, the concrete detail that matters, and the professional implication.
+1. THE HOOK (line 1) decides everything. Only ~140 characters show on mobile before "…see more", so line 1 must stop the scroll ON ITS OWN. Lead with the single most striking, concrete element. Choose the hook framework that best fits the FACTS:
+   - Surprising number/stat — "Drivers caught 38% more hazards — without looking away from the road."
+   - Counterintuitive finding — "More mirrors didn't fix the blind spot. A VR overlay did."
+   - Uncomfortable truth in the field — "Most blind-spot alerts fire too late to prevent the crash."
+   - Result preview — "A driving-simulator study just cut pedestrian misses by a third."
+   - The question practitioners already ask — "What if a headset could teach drivers to check their blind spot?"
+   NEVER open with "I'm excited", "Thrilled to share", a dictionary definition, or generic context. No hype words (game-changer, revolutionary, mind-blowing), no clickbait, no engagement bait.
+2. LINE 2 is the RE-HOOK: one short line that deepens the stakes or tension and makes the reader commit to "…see more".
+3. Then 3-6 SHORT paragraphs, each 1-2 sentences (~12-18 words per sentence), every paragraph separated by a BLANK LINE. Heavy white space — it must be effortless to skim on a phone. Deliver real substance: what was done, the key numbers, the mechanism/why it works, one limitation, and the practical implication for safety / engineering / training / policy. Make it worth SAVING (LinkedIn's strongest ranking signal): concrete, specific, reference-worthy — not fluff.
+4. Tone: professional, clear, confident, human. First-person insight is fine ("What stands out to me…") but never fabricated experience. 0-1 emoji, only if natural.
+5. Credit the source by name in the text ("New research on arXiv", "according to Road to VR"). Do NOT put the URL in the post body — LinkedIn suppresses posts with outbound links, so the link is shared separately.
+6. End with ONE specific, genuine question that invites practitioners to weigh in (not a lazy "Thoughts?").
+7. Final line: 3-5 hashtags mixing broad reach and niche (e.g. #RoadSafety #VirtualReality #DrivingSimulation #ADAS #HumanFactors).
+8. Target 1,300-2,000 characters. Short sentences. Every line earns its place.
+
+For research papers: name the method (simulator study, field test, dataset, survey, N participants if given), the main finding with numbers, and one limitation/open question.
+For news: what happened, who's behind it, the concrete detail that matters, and the professional implication.
 
 Also judge relevance: if the full text reveals this is NOT genuinely about VR/AR/driving simulation/blind zones/pedestrian safety for a professional audience, answer relevance="off_topic".
 
@@ -156,9 +164,15 @@ _POLISH_SCHEMA = {
     "required": ["post_text"],
 }
 
-_POLISH_PROMPT = """Rewrite the text below as a polished, professional LinkedIn post in English (translate first if it is in another language). Keep every fact exactly as given — do not invent anything.
+_POLISH_PROMPT = """Rewrite the text below into the BEST possible LinkedIn post in English (translate first if it is in another language). Keep every fact exactly as given — invent nothing.
 
-Structure: hook first line (works alone above the fold), blank-line-separated short paragraphs, professional but human tone, one closing question, 3-5 hashtags on the final line. 120-220 words. No clickbait or hype words.
+Apply 2026 LinkedIn best practices:
+- LINE 1 is the hook — only ~140 chars show on mobile before "…see more", so it must stop the scroll alone. Lead with the most striking number, a counterintuitive finding, an uncomfortable truth, or the question practitioners are asking. Never open with "I'm excited"/"Thrilled to share", a definition, or generic context. No hype words or clickbait.
+- LINE 2 re-hooks: deepen the stakes so the reader expands the post.
+- Then 3-6 short paragraphs (1-2 sentences each, ~12-18 words/sentence), every paragraph separated by a BLANK LINE for heavy white space and easy mobile skimming. Make it save-worthy: concrete, specific, useful.
+- Professional, confident, human tone; 0-1 emoji. Credit the source by name; keep any URL OUT of the body.
+- End with ONE specific question inviting practitioners to comment (not "Thoughts?").
+- Final line: 3-5 hashtags mixing broad and niche. Target 1,300-2,000 characters; short sentences.
 {instruction}
 TEXT:
 {text}

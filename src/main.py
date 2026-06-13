@@ -8,7 +8,9 @@ committing them so the GitHub Pages dashboard can show them. Nothing is ever
 posted automatically — 'publish' only acts on drafts the dashboard has marked
 "queued" (the user's explicit "Post to LinkedIn" click)."""
 import os
+import re
 import sys
+from urllib.parse import urlparse
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -25,7 +27,68 @@ def _summary(lines: list) -> None:
             f.write(text + "\n")
 
 
+def _cover_from_url(url: str):
+    """Build (candidate, body_text, image_url) for a user-supplied article/paper URL."""
+    host = urlparse(url).netloc.replace("www.", "") or "the web"
+    if "arxiv.org" in host:
+        title = abstract = authors = ""
+        m = re.search(r"(\d{4}\.\d{4,5})", url)
+        if m:
+            try:
+                import feedparser
+                parsed = feedparser.parse(
+                    feeds.http_get(feeds.ARXIV_API, params={"id_list": m.group(1)}).content)
+                if parsed.entries:
+                    e = parsed.entries[0]
+                    title = (e.get("title") or "").strip()
+                    abstract = re.sub(r"\s+", " ", e.get("summary", "") or "").strip()
+                    authors = ", ".join(a.get("name", "") for a in e.get("authors", [])[:4])
+            except Exception as ex:
+                print(f"  [warn] arXiv API failed: {ex}")
+        if not title:  # fall back to scraping the abs page
+            art = article.fetch_article(url)
+            title, abstract = art["title"], art["text"]
+        desc = (abstract + (f" (Authors: {authors})" if authors else ""))[:600]
+        cand = {"source_id": "manual", "source": "arXiv", "kind": "research", "topic": "",
+                "title": title, "url": url, "published": "", "description": desc}
+        return cand, abstract, ""
+    # generic article
+    art = article.fetch_article(url)
+    cand = {"source_id": "manual", "source": host, "kind": "news", "topic": "",
+            "title": art["title"], "url": url, "published": "", "description": art["text"][:600]}
+    return cand, art["text"], art["image"]
+
+
+def generate_one(url: str) -> int:
+    """Cover one specific URL the user pasted (skips discovery/dedup/relevance)."""
+    print(f"== Cover specific URL: {url} ==")
+    cand, body_text, image_url = _cover_from_url(url)
+    if not cand["title"]:
+        _summary(["## LinkedIn bot", f"Couldn't read a usable article/paper from {url}."])
+        return 0
+    selected = {"cluster": [cand], "topic_key": state.title_hash(cand["title"])}
+    try:
+        post = brain.compose_post(selected, body_text, image_url)
+    except Exception as e:
+        _summary(["## LinkedIn bot", f"Compose failed for {url}: {e}"])
+        return 0
+    if not post.get("image"):  # no source image -> topical photo / branded backdrop
+        post["image"] = images.search(post.get("topic", ""))
+    record = store.save_post(post)
+    history = state.load_history()
+    state.record(history, post, "drafted")
+    state.save_history(history)
+    _summary(["## LinkedIn bot — drafted from your link", "",
+              f"- **{post['title']}** ({post['topic']}, {post['kind']}) — {cand['source']} — `{record['id']}`"])
+    print(f"  drafted: {record['id']}")
+    return 0
+
+
 def generate() -> int:
+    cover_url = os.environ.get("COVER_URL", "").strip()
+    if cover_url:
+        return generate_one(cover_url)
+
     print(f"API budgets: {budget.summary()}")
 
     index = store.load_index()
@@ -184,8 +247,13 @@ if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "generate"
     if cmd == "generate":
         sys.exit(generate())
+    elif cmd == "cover":
+        if len(sys.argv) < 3:
+            print("usage: python -m src.main cover <url>")
+            sys.exit(1)
+        sys.exit(generate_one(sys.argv[2]))
     elif cmd == "publish":
         sys.exit(publish())
     else:
-        print(f"Unknown command: {cmd} (use 'generate' or 'publish')")
+        print(f"Unknown command: {cmd} (use 'generate', 'cover <url>' or 'publish')")
         sys.exit(1)

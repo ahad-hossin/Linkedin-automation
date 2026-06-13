@@ -8,8 +8,8 @@ from .feeds import http_get
 
 
 def fetch_article(url: str) -> dict:
-    """Returns {"text": str, "image": str} (og:image); empty strings on failure."""
-    out = {"text": "", "image": ""}
+    """Returns {"title": str, "text": str, "image": str}; empty strings on failure."""
+    out = {"title": "", "text": "", "image": ""}
     try:
         resp = http_get(url)
         if resp.status_code != 200:
@@ -24,6 +24,15 @@ def fetch_article(url: str) -> dict:
         soup.find("meta", attrs={"name": "og:image"})
     if og and og.get("content"):
         out["image"] = og["content"].strip()
+    ogt = soup.find("meta", attrs={"property": "og:title"}) or \
+        soup.find("meta", attrs={"name": "og:title"})
+    title = (ogt.get("content").strip() if ogt and ogt.get("content") else "")
+    if not title and soup.title and soup.title.string:
+        title = soup.title.string.strip()
+    if not title:
+        h1 = soup.find("h1")
+        title = h1.get_text(" ", strip=True) if h1 else ""
+    out["title"] = re.sub(r"\s+", " ", title)[:200]
 
     scope = (soup.find("article")
              or soup.find(class_=re.compile(r"(article|news|post|details?)[-_]?(body|content|details)", re.I))
