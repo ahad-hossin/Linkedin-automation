@@ -1,0 +1,42 @@
+{
+ "id": "20260613-ad3056c94e",
+ "title": "William's Walk Highlights Pedestrian Safety",
+ "summary": "The 2nd annual William's Walk in Memphis aims to raise awareness for pedestrian safety and support local efforts.",
+ "topic": "pedestrian safety",
+ "kind": "news",
+ "source": "Google News",
+ "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQWVUwOXRrdmkyOEEzcUg1ZDlHWlBLZDF1M3RId3B4QVRtRjRRVzA2X1p1MG5HQW1EUUZZXzNQYjROY3haQUw4d1I0NUhJODA4NUs3eWFNNVh2NUR1cUFsX1RMc1RkWkw0OU5hbjM3bDFmZTRJcTJKcEZCZ3o3UVc3NXgzekozZmVEdjl3UUh1aUh4UFdhcnRESVhlYlBvdXZHVnEzRDJRdHFaclBKbTUwdDA1UG1OWmhIUGl0MjhVUQ?oc=5",
+ "post_text": "The 2nd annual William's Walk in Memphis raised awareness for pedestrian safety.\n\nThis community event brought together participants to highlight the importance of safe walking practices and support local safety initiatives. Engaging the community is essential for fostering a culture of pedestrian safety and awareness.\n\nSuch events not only raise awareness but also encourage local authorities to prioritize pedestrian safety measures. However, the effectiveness of these initiatives can depend on community participation levels, which may vary each year.\n\nWhat strategies do you think are most effective for improving pedestrian safety in urban areas?\n\n#PedestrianSafety #CommunityAwareness #TrafficSafety #Memphis #UrbanPlanning",
+ "template": "cover",
+ "headline": "WILLIAM'S WALK PROMOTES PEDESTRIAN SAFETY",
+ "kicker": "AWARENESS INITIATIVE",
+ "details": [
+  "The 2nd annual William's Walk took place in Memphis, focusing on raising awareness for pedestrian safety.",
+  "This initiative supports local efforts to improve safety measures for pedestrians in the city.",
+  "Participants engaged in a community walk to highlight the importance of pedestrian awareness and safety.",
+  "Events like William's Walk are crucial for fostering community involvement in traffic safety issues.",
+  "One limitation of such events is that they rely on community participation and awareness, which can vary year to year."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Crosswalk_of_Market_at_Third%2C_San_Francisco.jpg",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "A luminous flat-vector illustration depicting a community walk for pedestrian safety, featuring abstract human figures with glowing outlines walking along a city street. The background transitions from deep navy to vibrant gradients of purple, magenta, teal, and orange, symbolizing unity and awareness. 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "A cinematic 3D scene showing a small silhouetted figure participating in a community walk, facing large translucent panels displaying pedestrian safety statistics and awareness messages in neon purple, magenta, and orange. The dark stage and faint grid floor create depth, emphasizing the importance of pedestrian safety. 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "A 'world-as-data' scene featuring a glowing neon-green wireframe overlay of a city street during the William's Walk event, with pedestrians and crosswalks highlighted against a near-black background. The scene captures the essence of pedestrian safety and community awareness, showcasing the importance of visibility in urban environments. 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-13T12:54:46Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}

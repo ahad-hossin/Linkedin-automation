@@ -223,5 +223,41 @@
   "source": "Google News",
   "status": "drafted",
   "at": "2026-06-13T10:06:53Z"
+ },
+ {
+  "title_hash": "b48e1e5da4710a6d",
+  "url": "https://arxiv.org/abs/2606.10702v1",
+  "headline": "Study on Technical Debt and Energy Consumption in AI Systems",
+  "topic": "driver_blind_zone_study",
+  "source": "arXiv",
+  "status": "skipped",
+  "at": "2026-06-13T12:54:39Z"
+ },
+ {
+  "title_hash": "ac89e1ba28343f2a",
+  "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQWVUwOXRrdmkyOEEzcUg1ZDlHWlBLZDF1M3RId3B4QVRtRjRRVzA2X1p1MG5HQW1EUUZZXzNQYjROY3haQUw4d1I0NUhJODA4NUs3eWFNNVh2NUR1cUFsX1RMc1RkWkw0OU5hbjM3bDFmZTRJcTJKcEZCZ3o3UVc3NXgzekozZmVEdjl3UUh1aUh4UFdhcnRESVhlYlBvdXZHVnEzRDJRdHFaclBKbTUwdDA1UG1OWmhIUGl0MjhVUQ?oc=5",
+  "headline": "William's Walk Highlights Pedestrian Safety",
+  "topic": "pedestrian_safety_memphis",
+  "source": "Google News",
+  "status": "drafted",
+  "at": "2026-06-13T12:54:46Z"
+ },
+ {
+  "title_hash": "ac89e1ba28343f2a",
+  "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNdWlncGI0TzNpQ0J4S3A5eE0tYTJIOTBKTHM0akFqaUpSZF80dkVCanNfYVJ3ODNqeEZPSGhObTlSV2QxLWwzUmdqOHNhdkViY3pvTFpvZm40dU1BOTNiYlMwV2hocC1jSFdFbFNnS29sVVVFYUNNdG9RVUNZQmpCb0wyNnBmU09WSklmbVFYbld1TEJnemh6Mlh0T0dhd0djVUVJYlIyX0d4N1pxdk5IY1ZWWW5uMjZPMEhjNVNvSE93V2pXZjI4?oc=5",
+  "headline": "William's Walk Highlights Pedestrian Safety",
+  "topic": "pedestrian_safety_memphis",
+  "source": "Google News",
+  "status": "drafted",
+  "at": "2026-06-13T12:54:46Z"
+ },
+ {
+  "title_hash": "34e64f6b205aef89",
+  "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPclUxODRlUFNqWlNDTWtHcklyRlE0M0wydG1vcUhJS1FKQmVmR2k5UWVKbGxhNzF6dVBCOWUzdl9pOHFydUxaclV1NC1IUDdVOEZTZ0c4b3RMRlZwRFhFVGJ1S3JlaEdvT2FGYlQ3QWFWcTlfTnhQb0M2MWVXbWM0QUF5QnVoTGY4RmhlS25wN1A?oc=5",
+  "headline": "New Pedestrian Safety Signs for City Crossings",
+  "topic": "pedestrian_safety_signs_recommendation",
+  "source": "Google News",
+  "status": "drafted",
+  "at": "2026-06-13T12:54:53Z"
  }
 ]

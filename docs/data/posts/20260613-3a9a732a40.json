@@ -1,0 +1,42 @@
+{
+ "id": "20260613-3a9a732a40",
+ "title": "New Pedestrian Safety Signs for City Crossings",
+ "summary": "Two city crossings in Door County are set to receive new pedestrian safety signs to enhance safety for walkers.",
+ "topic": "pedestrian safety",
+ "kind": "news",
+ "source": "Google News",
+ "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPclUxODRlUFNqWlNDTWtHcklyRlE0M0wydG1vcUhJS1FKQmVmR2k5UWVKbGxhNzF6dVBCOWUzdl9pOHFydUxaclV1NC1IUDdVOEZTZ0c4b3RMRlZwRFhFVGJ1S3JlaEdvT2FGYlQ3QWFWcTlfTnhQb0M2MWVXbWM0QUF5QnVoTGY4RmhlS25wN1A?oc=5",
+ "post_text": "Two city crossings in Door County are set to receive new pedestrian safety signs.\n\nThese signs aim to improve visibility and awareness for both pedestrians and drivers, ultimately reducing the risk of accidents. The initiative responds to community concerns about pedestrian safety in high-traffic areas, highlighting the need for better infrastructure.\n\nLocal authorities are considering these measures as part of a broader strategy to enhance urban safety and encourage walking. However, ongoing community education on pedestrian rights and responsibilities may be necessary to maximize the effectiveness of the signage efforts.\n\nWhat other measures do you think could further enhance pedestrian safety in urban areas?\n\n#PedestrianSafety #UrbanPlanning #TrafficSafety #CommunityEngagement #RoadSafety",
+ "template": "article",
+ "headline": "PEDESTRIAN SAFETY SIGNS RECOMMENDED",
+ "kicker": "NEW CROSSING MEASURES",
+ "details": [
+  "Recent recommendations have been made for the installation of pedestrian safety signs at two critical city crossings in Door County.",
+  "These signs aim to improve visibility and awareness for both pedestrians and drivers, ultimately reducing the risk of accidents.",
+  "The initiative responds to community concerns about pedestrian safety in high-traffic areas, highlighting the need for better infrastructure.",
+  "Local authorities are considering these measures as part of a broader strategy to enhance urban safety and encourage walking.",
+  "One potential limitation is the ongoing need for community education on pedestrian rights and responsibilities, which may complement the signage efforts."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Crosswalk_of_Market_at_Third%2C_San_Francisco.jpg",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "luminous flat-vector illustration of a city street scene at dusk, featuring glowing pedestrian safety signs, minimal geometric figures of pedestrians and vehicles, with abstract connecting lines representing safety awareness, deep navy background transitioning to vibrant gradients, 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "cinematic 3D scene showing a small silhouetted human figure standing at a busy city crossing, facing large translucent floating UI panels displaying pedestrian safety information and traffic data in neon purple-magenta-orange, dark urban environment with a faint grid floor, strong depth and perspective, 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "world-as-data scene depicting a neon-green wireframe overlay of a city street with crosswalks, cars, and pedestrians, highlighting the proposed locations for pedestrian safety signs, near-black background with a high-contrast digital-twin feel, 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-13T12:54:53Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}
