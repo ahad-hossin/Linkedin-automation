@@ -1,0 +1,38 @@
+{
+ "id": "20260613-aad4ed9d14",
+ "title": "Controlling Extreme Events in Neuronal Networks",
+ "summary": "A study reveals that a single driving signal can effectively suppress extreme events in neuronal networks across various configurations.",
+ "topic": "augmented reality",
+ "kind": "research",
+ "source": "arXiv",
+ "url": "https://arxiv.org/abs/2602.01234",
+ "post_text": "A recent study reveals that extreme events in neuronal networks can be effectively suppressed by a single driving signal.\n\nThis approach was validated across three distinct network topologies, including coupled neurons and multiplex networks. The findings indicate that influencing just one neuron can control extreme events, showcasing a potential scaling advantage as network size increases.\n\nThe research highlights the importance of phase-locking dynamics and frequency decoupling in neuronal interactions. These insights could inform future studies on complex systems in both biological and artificial networks.\n\nWhat implications do you see for this research in the context of neural engineering or computational models?\n\n#Neuroscience #NeuronalNetworks #ComplexSystems #BiologicalModeling #ArtificialIntelligence",
+ "template": "article",
+ "headline": "SUPPRESSING EXTREME EVENTS IN NEURONAL NETWORKS",
+ "kicker": "NEW NEUROSCIENCE RESEARCH",
+ "details": [
+  "In a recent study, researchers demonstrated that extreme events in neuronal networks can be controlled by applying a single driving signal. This approach was validated across three distinct network topologies: coupled neurons, a monolayer network of multiple neurons, and a two-layer multiplex network.",
+  "The findings showed that influencing just one neuron with a precisely tuned signal can suppress extreme events across all configurations. Specifically, in the two-neuron case, this suppression occurs by breaking phase-locking between the driving neuron and the targeted response neuron.",
+  "For monolayer and multiplex networks, extreme event suppression results from disrupting protoevent frequency dynamics, leading to frequency decoupling of the driven neuron from the rest of the network.",
+  "An interesting observation was that as the size of the neurons connected to the driving signal increases, the onset of control occurs earlier, indicating a scaling advantage of this method.",
+  "This research provides valuable insights into neuronal dynamics and could have implications for understanding complex systems in both biological and artificial networks."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://upload.wikimedia.org/wikipedia/commons/2/25/Google_Glass_Explorer_Edition.jpeg",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompt": "A dark, cinematic representation of a neuronal network with glowing connections and nodes, illustrating the concept of controlling extreme events through a single driving signal. The scene should depict a complex network structure with a highlighted neuron being influenced by a distinct signal, showcasing the dynamic interactions. The background should transition from deep navy to black, creating a soft volumetric glow around the network. 16:9 aspect ratio, ultra-detailed, no text.",
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-13T05:33:48Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}
