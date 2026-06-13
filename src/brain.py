@@ -381,17 +381,26 @@ def compose_post(selected: dict, body_text: str, image_url: str = "") -> dict:
         text=text[:4500] or "(text unavailable — use only the title; keep claims minimal)",
     )
     p = _call_llm([{"text": prompt}], _COMPOSE_SCHEMA)
-    details = [s.strip() for s in p.get("details", []) if s and s.strip()][:10]
+    # defensive: a fallback model may omit fields — never KeyError, and never
+    # produce an empty caption (synthesize one from the slide fields if needed)
+    details = [s.strip() for s in (p.get("details") or []) if s and s.strip()][:10]
+    title = (p.get("title") or primary.get("title") or "Untitled").strip()[:120]
+    headline = (p.get("headline") or title).strip()[:120]
+    summary = (p.get("summary") or "").strip()[:260]
+    post_text = (p.get("post_text") or "").strip()
+    if not post_text:  # model didn't return a caption — build a basic one
+        parts_ = [summary] + details
+        post_text = "\n\n".join([x for x in parts_ if x]).strip() or title
     return {
         "topic_key": selected["topic_key"],
-        "title": p["title"][:120],
-        "post_text": p["post_text"].strip(),
-        "summary": p["summary"][:260],
+        "title": title,
+        "post_text": post_text,
+        "summary": summary,
         "topic": p.get("topic", primary["topic"]),
         "relevance": p.get("relevance", "medium"),
         # --- carousel slide fields (the exact Meta Life design) ---
         "template": p.get("template", "article"),
-        "headline": p.get("headline", p["title"])[:120],
+        "headline": headline,
         "kicker": (p.get("kicker") or "").upper()[:40],
         "details": details,
         "thank_you": True,
