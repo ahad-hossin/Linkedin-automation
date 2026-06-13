@@ -310,22 +310,28 @@ def _call_github_models(parts: list, schema: dict, gemini_err: str = ""):
                             "json_schema": {"name": "output", "schema": schema}},
         "temperature": 0.4,
     }
-    try:
-        resp = requests.post(
-            _GH_MODELS_URL,
-            headers={"Authorization": f"Bearer {config.GH_MODELS_TOKEN}",
-                     "X-GitHub-Api-Version": "2022-11-28"},
-            json=body,
-            timeout=90,
-        )
-        budget.spend("ghmodels")
-        if resp.status_code != 200:
-            print(f"  [warn] GitHub Models HTTP {resp.status_code}: {resp.text[:140]}")
-            return None
-        return _extract_json(resp.json()["choices"][0]["message"]["content"])
-    except Exception as e:
-        print(f"  [warn] GitHub Models fallback failed: {str(e)[:120]}")
-        return None
+    # this is the unattended cron's only lane (no user key), so retry the
+    # occasional slow/timeout response before giving up
+    for attempt in range(2):
+        try:
+            resp = requests.post(
+                _GH_MODELS_URL,
+                headers={"Authorization": f"Bearer {config.GH_MODELS_TOKEN}",
+                         "X-GitHub-Api-Version": "2022-11-28"},
+                json=body,
+                timeout=150,
+            )
+            budget.spend("ghmodels")
+            if resp.status_code != 200:
+                print(f"  [warn] GitHub Models HTTP {resp.status_code}: {resp.text[:140]}")
+                if resp.status_code in (429, 500, 502, 503, 504) and attempt == 0:
+                    continue
+                return None
+            return _extract_json(resp.json()["choices"][0]["message"]["content"])
+        except Exception as e:
+            print(f"  [warn] GitHub Models attempt {attempt + 1} failed: {str(e)[:120]}")
+            continue
+    return None
 
 
 def select_items(candidates: list, history: list) -> list:
