@@ -1,0 +1,42 @@
+{
+ "id": "20260613-6518141460",
+ "title": "Transparent LED Railings Enhance Pedestrian Safety in Gwangju",
+ "summary": "APS DNL has installed transparent LED railings on the Opo Pedestrian Overpass in Gwangju to enhance safety and visibility.",
+ "topic": "pedestrian safety",
+ "kind": "news",
+ "source": "Google News",
+ "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFB3SzhYM182X0s3NmdOWUhPSEp0M1FJM3l1dDVVZWtLeXVzSkhhdXY3bHV3VzdjR0FHWVU0VUx2VEUtcGE5bGRPQXBORU8zSWtDVDRzZ2ktZzdrcDlQcExOQ2VvN0Y3UDg?oc=5",
+ "post_text": "Transparent LED railings have been installed on the Opo Pedestrian Overpass in Gwangju.\n\nThis innovative safety feature aims to enhance visibility for pedestrians, allowing for clearer sightlines and reducing accident risks. The integrated LED lighting provides illumination during low-light conditions, further improving safety.\n\nAs urban areas increasingly adopt technology to enhance pedestrian safety, this installation sets a precedent for future projects. However, ongoing maintenance of the LED systems will be crucial to ensure their effectiveness over time.\n\nWhat other technologies could be integrated into urban infrastructure to improve pedestrian safety?\n\n#PedestrianSafety #UrbanDesign #LEDTechnology #SmartCities #Gwangju",
+ "template": "article",
+ "headline": "TRANSPARENT LED RAILINGS INSTALLED IN GWANGJU",
+ "kicker": "NEW PEDESTRIAN SAFETY INITIATIVE",
+ "details": [
+  "APS DNL has recently completed the installation of transparent LED railings on the Opo Pedestrian Overpass in Gwangju. This initiative aims to improve pedestrian safety by enhancing visibility and awareness.",
+  "The transparent design allows for unobstructed views, reducing the likelihood of accidents by ensuring pedestrians can see their surroundings clearly. The LED lights can also provide illumination during low-light conditions, further enhancing safety.",
+  "This installation reflects a growing trend in urban design, where technology is used to create safer pedestrian environments. The integration of LED technology into infrastructure is becoming increasingly popular in cities worldwide.",
+  "One potential limitation of this innovation is the maintenance of the LED systems, which may require regular checks to ensure functionality. Additionally, the long-term durability of the transparent materials under various weather conditions remains an open question.",
+  "The success of this project could lead to similar installations in other urban areas, promoting a safer experience for pedestrians and encouraging more foot traffic in city centers."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Crosswalk_of_Market_at_Third%2C_San_Francisco.jpg",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "A luminous flat-vector illustration of a pedestrian overpass with transparent LED railings glowing in various colors, surrounded by pedestrians and urban scenery, deep navy background with purple, magenta, teal, and orange gradients, minimal geometric faces with pixel eyes, thin connecting lines, and rounded-square icon chips orbiting the scene, 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "A cinematic 3D scene featuring a small silhouetted human figure standing on a pedestrian overpass, facing large translucent floating UI panels displaying safety data and pedestrian flow charts in neon purple, magenta, and orange, set against a dark stage with a faint grid floor, strong depth and perspective, 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "A world-as-data scene showcasing a glowing neon-green wireframe of a pedestrian overpass, with transparent LED railings overlaying a real street, crosswalks, and pedestrians in a near-black environment; high-contrast sensor-simulation feel, 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-13T22:13:35Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}

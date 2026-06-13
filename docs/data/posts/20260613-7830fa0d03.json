@@ -1,0 +1,43 @@
+{
+ "id": "20260613-7830fa0d03",
+ "title": "Developers Are Building Impressive Apps For Meta Ray-Ban Display&#x27;s HUD &amp; Neural Band",
+ "summary": "Meta's recent update allows developers to create visual apps for the Ray-Ban Display, expanding its functionality significantly.",
+ "topic": "virtual reality",
+ "kind": "news",
+ "source": "UploadVR",
+ "url": "https://www.uploadvr.com/meta-ray-ban-display-amazing-hud-apps/",
+ "post_text": "Meta has rolled out visual app support for the Ray-Ban Display, allowing developers to create innovative applications.\n\nThis update enables the display of text, images, and interactive elements, significantly enhancing user experience. Developers can utilize the Wearables Device Access Toolkit SDK to send UI content to the heads-up display and create both extended smartphone apps and standalone web apps.\n\nThe Extended Smartphone Apps path allows the HUD to function as an external display, while the Standalone Web Apps path permits the use of HTML, CSS, and JavaScript for native applications. This flexibility opens new avenues for creating real-time data displays and utilities.\n\nHowever, the small display size limits the usability of most websites, necessitating the development of mini web apps specifically designed for the device. Meta supports AI coding agents to facilitate the development process, making it accessible for developers with basic technical skills.\n\nWhat types of applications do you envision being developed for the Ray-Ban Display?\n\n#VirtualReality #AugmentedReality #SmartGlasses #TechInnovation #DeveloperCommunity",
+ "template": "article",
+ "headline": "META ROLLS OUT VISUAL APPS FOR RAY-BAN DISPLAY",
+ "kicker": "NEW HUD CAPABILITIES",
+ "details": [
+  "Meta has introduced visual app support for the Ray-Ban Display, enabling developers to extend smartphone apps to the smart glasses. This update allows for the display of text, images, buttons, and videos, enhancing user interaction.",
+  "Using the Wearables Device Access Toolkit SDK, developers can now send UI content to the Ray-Ban Display's heads-up display (HUD). This includes both Extended Smartphone Apps and Standalone Web Apps, allowing for a broader range of applications.",
+  "The Extended Smartphone Apps path allows the HUD to function as an external display, while the Standalone Web Apps path enables developers to create apps using HTML, CSS, and JavaScript that run natively on the glasses.",
+  "This update provides developers with access to motion data, GPS location, and local storage, allowing for more dynamic and interactive applications. However, the user interface must be optimized for the small display size of 600x600 pixels.",
+  "While the new features open up exciting possibilities, the limitation remains that most websites are not usable on the glasses due to the small screen and input constraints. Developers are encouraged to create mini web apps tailored for the device.",
+  "Meta supports AI coding agents to assist in the development process, making it easier for developers to create and iterate on their applications quickly. This includes plugins for popular coding tools and live documentation access."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://storage.ghost.io/c/2a/2f/2a2f38f0-4b71-407a-9c7e-18a9e2541980/content/images/size/w1200/2026/06/Meta-Ray-Ban-Display-visual-app-support-examples.png",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "luminous flat-vector illustration of a futuristic smart glasses interface, showcasing glowing abstract UI elements and minimal geometric designs, with a deep navy background transitioning to vibrant gradients, emphasizing technology and innovation, 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "cinematic 3D scene depicting a small silhouetted human figure interacting with large translucent floating UI panels and dashboards, illuminated in neon purple-magenta-orange, set against a dark stage with a faint grid floor, conveying a sense of advanced technology, 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "world-as-data scene featuring a glowing neon-green wireframe overlay of a smart city street, with elements like crosswalks, pedestrians, and vehicles represented in a point-cloud style, creating a high-contrast digital-twin environment, 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-13T22:13:43Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}
