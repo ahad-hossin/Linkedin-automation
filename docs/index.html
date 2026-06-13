@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VR/AR &amp; Road-Safety — LinkedIn Post Studio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">in</span>
+      <div>
+        <h1>Post Studio</h1>
+        <p class="tagline">VR · AR · Driving Simulation · Blind Zones · Pedestrian Safety</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <span id="status-pill" class="pill">Loading…</span>
+      <button id="refresh-btn" class="btn ghost" title="Reload posts">↻</button>
+      <button id="settings-btn" class="btn ghost">⚙ Settings</button>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- views injected here -->
+  </main>
+
+  <!-- Settings modal -->
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-card">
+      <h2>Settings</h2>
+      <p class="hint">Stored only in this browser (localStorage). Nothing is sent anywhere except GitHub and Google when you act.</p>
+
+      <label>GitHub repository <small>(owner/repo)</small></label>
+      <input id="set-repo" type="text" placeholder="yourname/linkedin" />
+
+      <label>GitHub token <small>(fine-grained PAT — Contents: write, Actions: write)</small></label>
+      <input id="set-ghtoken" type="password" placeholder="github_pat_…" />
+
+      <label>Gemini API keys <small>(one per line — rotated automatically when one hits its limit)</small></label>
+      <textarea id="set-gemini" rows="3" placeholder="AIza…&#10;AIza…"></textarea>
+
+      <label>Groq API key <small>(optional AI fallback)</small></label>
+      <input id="set-groq" type="password" placeholder="gsk_…" />
+
+      <label>LinkedIn access token <small>(w_member_social — only used when you click Post)</small></label>
+      <input id="set-litoken" type="password" placeholder="AQ…" />
+
+      <label>LinkedIn author URN <small>(who posts, e.g. urn:li:person:xxxx)</small></label>
+      <input id="set-liurn" type="text" placeholder="urn:li:person:…" />
+
+      <label class="checkbox" style="margin-top:14px">
+        <input id="set-autohour" type="checkbox" />
+        <span>Auto-generate every hour while this tab is open</span>
+      </label>
+
+      <div class="modal-actions">
+        <button id="set-save" class="btn primary">Save</button>
+        <button id="set-cancel" class="btn ghost">Cancel</button>
+      </div>
+      <p class="hint" id="set-status"></p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
