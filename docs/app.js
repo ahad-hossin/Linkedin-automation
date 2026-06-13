@@ -438,22 +438,28 @@ async function renderEditor(id) {
   $("btn-translate").onclick = () => runPolish("The text may be in another language; translate it to English.");
   $("li-seemore").onclick = () => { $("pv-caption").classList.add("expanded"); $("pv-caption").classList.remove("clamp"); $("li-seemore").hidden = true; };
 
-  // carousel navigation: arrows, swipe/drag, keyboard
-  $("li-prev").onclick = () => goTo(carIndex - 1);
-  $("li-next").onclick = () => goTo(carIndex + 1);
-  let dragX = null, dragStart = 0;
+  // carousel navigation: arrows + swipe/drag
+  $("li-prev").onclick = e => { e.stopPropagation(); goTo(carIndex - 1); };
+  $("li-next").onclick = e => { e.stopPropagation(); goTo(carIndex + 1); };
+  // keep the arrows from starting a drag (which would capture the pointer and
+  // swallow their own click)
+  [$("li-prev"), $("li-next")].forEach(b => b.addEventListener("pointerdown", e => e.stopPropagation()));
+
+  let dragX = null, dragStart = 0, captured = false, pid = null;
   const car = $("li-carousel");
-  car.addEventListener("pointerdown", e => { dragX = e.clientX; dragStart = carIndex; car.setPointerCapture(e.pointerId); });
+  car.addEventListener("pointerdown", e => { dragX = e.clientX; dragStart = carIndex; pid = e.pointerId; captured = false; });
   car.addEventListener("pointermove", e => {
     if (dragX === null) return;
-    const vw = car.clientWidth || 440;
     const dx = e.clientX - dragX;
-    $("li-track").style.transform = `translateX(${-dragStart * vw + dx}px)`;
+    if (!captured && Math.abs(dx) > 6) { captured = true; try { car.setPointerCapture(pid); } catch (_) {} }
+    if (captured) { const vw = car.clientWidth || 440; $("li-track").style.transform = `translateX(${-dragStart * vw + dx}px)`; }
   });
   const endDrag = e => {
     if (dragX === null) return;
-    const dx = e.clientX - dragX; dragX = null;
-    if (Math.abs(dx) > 50) goTo(dragStart + (dx < 0 ? 1 : -1)); else goTo(dragStart);
+    const dx = e.clientX - dragX; const wasDrag = captured;
+    dragX = null; captured = false;
+    if (wasDrag && Math.abs(dx) > 50) goTo(dragStart + (dx < 0 ? 1 : -1));
+    else if (wasDrag) goTo(dragStart);
   };
   car.addEventListener("pointerup", endDrag);
   car.addEventListener("pointercancel", endDrag);
