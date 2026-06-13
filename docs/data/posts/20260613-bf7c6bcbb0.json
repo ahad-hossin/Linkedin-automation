@@ -1,0 +1,42 @@
+{
+ "id": "20260613-bf7c6bcbb0",
+ "title": "Lakewood Police Conduct AAA Pedestrian Safety Training",
+ "summary": "Lakewood Police recently hosted a pedestrian safety training session in collaboration with AAA, focusing on improving officer awareness and response.",
+ "topic": "pedestrian safety",
+ "kind": "news",
+ "source": "Google News",
+ "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNV3FUbFhkOE5PU2xmQ0lUYy1GaVpuTE84V21YNEREMFNTSEtFOTlHQUhVMDl2eVp2cFEtNXBWWWtMOWFWRUVqZ2EtSHhzUVR2c20tWms0V2ZJU2pXNUxvQkV3RlhmVkd4emhOd1A3MDBsbjFDbGR2VDNCWUI5MzMzaHg2cERiSlg0aXJIOXhERGFDSGNXZFRidDlac3J0SHU2QmFOZkdobEZpd9IBwAFBVV95cUxQQS00eHpBNXlxbVJuRlhsV1pVdHA3MUMzOEdhSFVqRW1wRjJNSjZELTl6QVE2YkhiSFdMZklkNVlSeVdPWnkwVVhXSEx4c0c4X3lOb0wzNk9IZVNGZWxFR29sMWZTWlBBbWxpS2l1T05sV2owV21rZDgwNXk3UFp4aE1xZUwzWnc0Z1YzQlpaLU5PaUpxaHJ1Y1dhcXNQNnUxV3dONnF5VnNXWXNyT3JTNWJlUEN0cnBhMVJiTjgtVjU?oc=5",
+ "post_text": "Lakewood Police are taking proactive steps to enhance pedestrian safety. \n\nRecently, they hosted a training session in collaboration with AAA, focusing on improving officer awareness and response to pedestrian safety issues. \n\nThe training included interactive sessions aimed at equipping officers with best practices for ensuring pedestrian safety, including navigating blind spots and understanding traffic laws. \n\nThis initiative highlights the importance of law enforcement's role in addressing pedestrian safety concerns in urban environments. However, continued evaluation will be essential to assess the training's effectiveness in real-world scenarios. \n\nWhat additional measures can be taken to further enhance pedestrian safety in our communities? \n\n#PedestrianSafety #TrafficSafety #LawEnforcement #CommunityEngagement #AAA",
+ "template": "article",
+ "headline": "LAKEWOOD POLICE TRAIN ON PEDESTRIAN SAFETY",
+ "kicker": "POLICE TRAINING INITIATIVE",
+ "details": [
+  "The Lakewood Police Department organized a pedestrian safety training session for local officers, collaborating with the American Automobile Association (AAA).",
+  "The training aimed to enhance officers' understanding of pedestrian safety issues and effective response strategies in real-world scenarios.",
+  "Officers participated in interactive sessions that covered best practices for ensuring pedestrian safety, including awareness of blind spots and traffic laws.",
+  "This initiative reflects a growing commitment among law enforcement to prioritize pedestrian safety in urban areas, addressing rising concerns over traffic-related incidents.",
+  "While the training is a positive step, ongoing evaluations will be necessary to measure its impact on actual pedestrian safety outcomes in the community."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Crosswalk_of_Market_at_Third%2C_San_Francisco.jpg",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "luminous flat-vector illustration: deep-navy bg, purple->magenta->teal->orange gradients, glowing abstract human forms interacting with traffic signs and crosswalks, minimal geometric faces with tiny square 'pixel' eyes, thin connecting lines and rounded-square icon chips orbiting a central subject of a police officer, 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "cinematic 3D scene: a small silhouetted police officer facing large translucent floating UI panels displaying pedestrian safety statistics and traffic laws in neon purple-magenta-orange, dark stage, faint grid floor, strong depth and perspective, 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "world-as-data scene: glowing neon-green wireframe overlay of a busy street with crosswalks, cars, and pedestrians, highlighting pedestrian zones and blind spots, near-black background; high-contrast sensor-simulation / digital-twin feel, 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-13T10:06:53Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}

@@ -1,0 +1,42 @@
+{
+ "id": "20260613-1f5b6585df",
+ "title": "Community-Driven Pedestrian Safety Campaign in Maine",
+ "summary": "A new pedestrian safety campaign has been launched in Portland, Lewiston, and Auburn, focusing on community involvement to enhance safety measures.",
+ "topic": "pedestrian safety",
+ "kind": "news",
+ "source": "Google News",
+ "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQQVVhaVk2d3I1VmkyM3RRY2FoSXVmTHJxTmk4QzlyZXhRZXRBZ3J6S0YyZ1pyMmJNZzBtaDRXUjVfWGJISzRMVVNFSnpxQkEyYXN0cFg4Sl9UZTk2NkhGNnd6a2RQS1hTSjdVaGhfbHB2TTM0V3k1b05GeklONDl2S3FVUTR5Sm1CU0p0OHBYekJVSVF5d2Y5MGhYQnBGcHBQbjVVd0dpa3VjNF9TYUl4TTJWd0tyMVhEc3U4TWRQVQ?oc=5",
+ "post_text": "A community-driven pedestrian safety campaign just launched in Portland, Lewiston, and Auburn.\n\nThis initiative aims to enhance pedestrian safety through local engagement and collaboration. Residents are encouraged to participate in discussions that highlight specific safety concerns and potential solutions.\n\nThe campaign includes educational programs and outreach efforts to improve pedestrian visibility. By involving the community, the initiative seeks to address unique local challenges that may not be evident to city planners.\n\nHowever, the effectiveness of the campaign may depend on varying levels of community engagement across neighborhoods.\n\nHow do you think community involvement can shape pedestrian safety initiatives in your area?\n\n#PedestrianSafety #CommunityEngagement #UrbanPlanning #RoadSafety #Maine",
+ "template": "article",
+ "headline": "COMMUNITY-DRIVEN PEDESTRIAN SAFETY INITIATIVE",
+ "kicker": "NEW SAFETY CAMPAIGN LAUNCHED",
+ "details": [
+  "A community-driven pedestrian safety campaign has launched in Portland, Lewiston, and Auburn, aiming to improve safety for walkers in these areas.",
+  "This initiative encourages local residents to participate in discussions and activities focused on pedestrian safety, fostering a sense of shared responsibility.",
+  "The campaign includes educational programs, outreach efforts, and potential infrastructure improvements to enhance pedestrian visibility and safety.",
+  "Community involvement is crucial as it helps identify specific local issues and solutions that may not be visible to city planners alone.",
+  "One limitation of the campaign is the reliance on community engagement, which may vary in effectiveness across different neighborhoods."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Crosswalk_of_Market_at_Third%2C_San_Francisco.jpg",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "luminous flat-vector illustration: deep-navy bg, purple->magenta->teal->orange gradients, glowing abstract human figures walking on a street, minimal geometric faces with tiny square 'pixel' eyes, thin connecting lines and rounded-square icon chips orbiting a central pedestrian safety sign, 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "cinematic 3D scene: a small silhouetted human figure standing on a sidewalk, facing large translucent floating UI panels displaying pedestrian safety data and community feedback in neon purple-magenta-orange, dark stage, faint grid floor, depth and perspective, 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "world-as-data scene: glowing neon-green wireframe overlaying a real street in Portland, showing crosswalks, pedestrians, and traffic signals on near-black; sensor-simulation feel highlighting pedestrian safety issues and community engagement, 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-13T10:06:47Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}
