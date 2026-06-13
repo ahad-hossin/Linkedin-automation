@@ -164,8 +164,10 @@ LINKEDIN_AUTHOR_URN = os.environ.get("LINKEDIN_AUTHOR_URN", "")  # e.g. urn:li:p
 # --- Paths ---
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE_FILE = os.path.join(ROOT, "state", "history.json")
-POSTS_DIR = os.path.join(ROOT, "docs", "data", "posts")
-INDEX_FILE = os.path.join(ROOT, "docs", "data", "index.json")
+# data paths can be redirected via env (e.g. for local testing) so a test run
+# never writes into the committed docs/data that the live site serves
+POSTS_DIR = os.environ.get("LINKEDIN_POSTS_DIR", os.path.join(ROOT, "docs", "data", "posts"))
+INDEX_FILE = os.environ.get("LINKEDIN_INDEX_FILE", os.path.join(ROOT, "docs", "data", "index.json"))
 
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
