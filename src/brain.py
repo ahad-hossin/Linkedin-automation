@@ -110,11 +110,20 @@ _COMPOSE_SCHEMA = {
             "description": "the fuller story as 3-7 short standalone paragraphs (2-3 sentences each). They auto-flow onto the carousel's story slides. Put the most important facts first; for a paper give method (simulator study / field test / dataset, N participants if known), main finding, and one limitation or open question.",
         },
         "post_text": {"type": "string", "description": "the complete LinkedIn CAPTION, ready to publish: hook line, blank-line-separated short paragraphs, source credit, closing question, then 3-5 hashtags on the final line"},
-        "image_prompt": {"type": "string", "description": "a 60-110 word, copy-paste-ready image-generation prompt (for Google Flow / Imagen) for a 16:9 hero image in the house style, grounded in THIS post's concrete subject, ending with '16:9 aspect ratio, ultra-detailed, no text.'"},
+        "image_prompts": {
+            "type": "object",
+            "description": "THREE copy-paste-ready image-generation prompts (Google Flow / Imagen) for a 16:9 hero image of THIS post — one in EACH house style. Each 50-90 words, grounded in the post's concrete subject, ending with '16:9 aspect ratio, ultra-detailed, no text.'",
+            "properties": {
+                "gradient": {"type": "string", "description": "luminous flat-vector illustration: deep-navy bg, purple->magenta->teal->orange gradients, glowing abstract human/brain/device forms, minimal geometric faces with tiny square 'pixel' eyes, thin connecting lines and rounded-square icon chips"},
+                "panels": {"type": "string", "description": "cinematic 3D scene: a small silhouetted human figure facing large translucent floating UI panels/dashboards/charts in neon purple-magenta-orange, dark stage, faint grid floor, depth and perspective"},
+                "datagrid": {"type": "string", "description": "'world-as-data' scene: glowing neon-green wireframe / point-cloud / LiDAR mesh / grid overlaying a real street, crosswalk, cars, pedestrians or trees on near-black; sensor-simulation / digital-twin feel"},
+            },
+            "required": ["gradient", "panels", "datagrid"],
+        },
         "topic": {"type": "string", "enum": ["virtual reality", "augmented reality", "driving simulation", "driver blind zone", "pedestrian safety"]},
         "relevance": {"type": "string", "enum": ["high", "medium", "off_topic"], "description": "off_topic if, on reading the full text, this is not actually about the focus areas"},
     },
-    "required": ["title", "template", "headline", "summary", "details", "post_text", "image_prompt", "topic", "relevance"],
+    "required": ["title", "template", "headline", "summary", "details", "post_text", "image_prompts", "topic", "relevance"],
 }
 
 _COMPOSE_PROMPT = """You create LinkedIn carousel posts for a professional working in virtual reality, augmented reality, driving simulation, driver blind zones, and pedestrian safety.
@@ -145,11 +154,10 @@ You produce TWO things for the item below: (A) the on-image carousel slide text,
 7. Final line: 3-5 hashtags mixing broad reach and niche (e.g. #RoadSafety #VirtualReality #DrivingSimulation #ADAS #HumanFactors).
 8. Target 1,300-2,000 characters. Short sentences. Every line earns its place.
 
-(C) IMAGE PROMPT (image_prompt) — a copy-paste-ready prompt for an image generator (Google Flow / Imagen) for a 16:9 hero image representing THIS post, in this house style:
-Dark, cinematic AI/tech-editorial art on a deep navy-to-black or deep-purple gradient; generous negative space, soft volumetric glow, crisp high detail, premium and modern; ONE clear concept; NO text, words, logos or watermark. Pick the single look that best fits the subject:
-- driving / road / vehicle / sensor / ADAS / AV / blind-spot / pedestrian-detection subjects -> a "world-as-data" scene: glowing neon-green wireframe / point-cloud / LiDAR mesh / grid overlaying a real street, crosswalk, cars, pedestrians or trees on near-black; sensor-simulation / digital-twin feel.
-- VR / AR / training / software / research concepts -> EITHER a luminous flat-vector illustration (purple->magenta->teal->orange gradients, glowing abstract human/brain/device forms, minimal geometric faces with tiny square "pixel" eyes, thin connecting lines and rounded-square icon chips orbiting a central subject) OR a small silhouetted figure facing large translucent floating UI panels/dashboards in neon purple-magenta-orange on a dark grid stage.
-Ground it in the post's ACTUAL subject (name the concrete objects/scene). 60-110 words, vivid but concrete. End with exactly: "16:9 aspect ratio, ultra-detailed, no text."
+(C) IMAGE PROMPTS (image_prompts) — write THREE copy-paste-ready prompts for an image generator (Google Flow / Imagen), one in EACH house style, all for a 16:9 hero image representing THIS post. All three share: dark, cinematic AI/tech-editorial art, deep navy-to-black or deep-purple base, generous negative space, soft volumetric glow, crisp high detail, premium and modern, ONE clear concept, and NO text/words/logos/watermark. Ground EVERY prompt in the post's ACTUAL subject (name the concrete objects/scene). Each 50-90 words, vivid but concrete, ending EXACTLY with "16:9 aspect ratio, ultra-detailed, no text." The three styles:
+- "gradient": luminous flat-vector illustration — purple->magenta->teal->orange gradients, glowing abstract human/brain/device forms, minimal geometric faces with tiny square "pixel" eyes, thin connecting lines and rounded-square icon chips orbiting a central subject.
+- "panels": cinematic 3D scene — a small silhouetted human figure facing large translucent floating UI panels, dashboards and charts in neon purple-magenta-orange, dark stage, faint grid floor, strong depth and perspective.
+- "datagrid": "world-as-data" scene — glowing neon-green wireframe / point-cloud / LiDAR mesh / grid overlaying a real street, crosswalk, cars, pedestrians or trees on near-black; high-contrast sensor-simulation / digital-twin / AV-perception feel.
 
 For research papers: name the method (simulator study, field test, dataset, survey, N participants if given), the main finding with numbers, and one limitation/open question.
 For news: what happened, who's behind it, the concrete detail that matters, and the professional implication.
@@ -408,7 +416,8 @@ def compose_post(selected: dict, body_text: str, image_url: str = "") -> dict:
         "topic_key": selected["topic_key"],
         "title": title,
         "post_text": post_text,
-        "image_prompt": (p.get("image_prompt") or "").strip(),
+        "image_prompts": {k: ((p.get("image_prompts") or {}).get(k) or "").strip()
+                          for k in ("gradient", "panels", "datagrid")},
         "summary": summary,
         "topic": p.get("topic", primary["topic"]),
         "relevance": p.get("relevance", "medium"),

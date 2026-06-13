@@ -307,6 +307,14 @@ textarea { resize: vertical; min-height: 96px; line-height: 1.55; }
 .detail-card { border: 1px solid var(--line); border-radius: var(--r-sm); padding: 11px; margin-bottom: 10px; background: var(--surface-2); }
 .detail-card .d-head { border: 1px solid var(--line-strong); border-radius: 6px; padding: 7px 9px; flex: 1; }
 
+/* AI image-prompt style blocks */
+.ip-block { border: 1px solid var(--line); border-radius: var(--r-sm); padding: 11px; margin-bottom: 10px; background: var(--surface-2); }
+.ip-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.ip-head span { font-size: 12px; font-weight: 600; color: var(--ink); }
+.ip-copy { font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid var(--line-strong); background: var(--surface); color: var(--muted); border-radius: 999px; padding: 3px 11px; }
+.ip-copy:hover { background: var(--surface-2); color: var(--brand-dark); border-color: var(--brand); }
+.ip-text { width: 100%; min-height: 84px; font: inherit; font-size: 13px; line-height: 1.5; padding: 9px 11px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); box-sizing: border-box; resize: vertical; }
+
 .hint { font-size: 12px; color: var(--faint); line-height: 1.5; }
 #ed-status { margin-top: 10px; font-weight: 600; color: var(--accent-ink); min-height: 16px; }
 

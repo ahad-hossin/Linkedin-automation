@@ -179,28 +179,38 @@ const IMG_STYLE_SPEC = {
   datagrid: `Use a "world-as-data" scene: glowing neon-green wireframe / point-cloud / LiDAR mesh / grid overlaying a real street, crosswalk, vehicles, pedestrians and trees on near-black; high contrast, sensor-simulation / digital-twin / autonomous-vehicle perception feel.`,
 };
 
-const IMGPROMPT_SCHEMA = { type: "object", properties: { image_prompt: { type: "string" } }, required: ["image_prompt"] };
+// the three styles shown in the editor (key -> label)
+const IMG_STYLES = [
+  { k: "gradient", label: "Luminous gradient illustration" },
+  { k: "panels", label: "3D figure + floating data panels" },
+  { k: "datagrid", label: "Neon-green data / LiDAR scene" },
+];
 
-async function geminiImagePrompt(post, style) {
+const IMGPROMPTS_SCHEMA = {
+  type: "object",
+  properties: { gradient: { type: "string" }, panels: { type: "string" }, datagrid: { type: "string" } },
+  required: ["gradient", "panels", "datagrid"],
+};
+
+// produce ALL THREE style prompts in one Gemini call -> {gradient, panels, datagrid}
+async function geminiImagePrompts(post) {
   const keys = store.geminiKeys;
   if (!keys.length) throw new Error("Add a Gemini API key in Settings to generate image prompts.");
-  const styleSpec = IMG_STYLE_SPEC[style] || IMG_STYLE_SPEC.auto;
   const subject = [post.headline || post.title, post.summary, (post.details || []).slice(0, 2).join(" ")]
     .filter(Boolean).join(" — ").slice(0, 600);
   const prompt =
-`You write image-generation prompts for Google Flow / Imagen. Produce ONE detailed, copy-paste-ready prompt for a 16:9 hero image that visually represents the LinkedIn post below, in this exact house style.
+`You write image-generation prompts for Google Flow / Imagen. Produce THREE copy-paste-ready prompts for a 16:9 hero image that represents the LinkedIn post below — ONE in each house style. All share: ${IMG_STYLE_SPEC.shared} Ground EVERY prompt in the post's ACTUAL subject (name the concrete objects/scene — e.g. a driving-simulator rig, a VR headset, a crosswalk, an A-pillar blind spot, a LiDAR street scan). Each 50-90 words, vivid but concrete, ending EXACTLY with "16:9 aspect ratio, ultra-detailed, no text."
 
-HOUSE STYLE: ${IMG_STYLE_SPEC.shared} ${styleSpec}
-
-Rules: ground the concept in the post's ACTUAL subject (name the concrete objects/scene — e.g. a driving simulator rig, a VR headset, a crosswalk, an A-pillar blind spot, a LiDAR street scan). Be specific about the central subject, supporting elements, colour palette, lighting, mood and composition. 60-110 words, vivid but concrete. Do NOT include any text/words/UI labels in the image. End the prompt with: "16:9 aspect ratio, ultra-detailed, no text."
+The three styles:
+- "gradient": ${IMG_STYLE_SPEC.gradient}
+- "panels": ${IMG_STYLE_SPEC.panels}
+- "datagrid": ${IMG_STYLE_SPEC.datagrid}
 
 POST TOPIC: ${post.topic || ""}
-POST: ${subject}
-
-Output only the prompt.`;
+POST: ${subject}`;
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.6, responseMimeType: "application/json", responseSchema: IMGPROMPT_SCHEMA },
+    generationConfig: { temperature: 0.6, responseMimeType: "application/json", responseSchema: IMGPROMPTS_SCHEMA },
   };
   let lastErr = "no keys";
   for (const key of keys) {
@@ -212,7 +222,8 @@ Output only the prompt.`;
     if (r.status === 429 || r.status === 403) { lastErr = `Gemini ${r.status} — trying next key`; continue; }
     if (!r.ok) { lastErr = `Gemini ${r.status}: ${(await r.text()).slice(0,140)}`; continue; }
     const out = (await r.json()).candidates?.[0]?.content?.parts?.[0]?.text || "{}";
-    return (JSON.parse(out).image_prompt || "").trim();
+    const o = JSON.parse(out);
+    return { gradient: (o.gradient||"").trim(), panels: (o.panels||"").trim(), datagrid: (o.datagrid||"").trim() };
   }
   throw new Error(`All Gemini keys failed (${lastErr})`);
 }
@@ -297,7 +308,9 @@ async function renderEditor(id) {
     thanks_follow: post.thanks_follow || "Follow us for more\nnews and updates of our work",
     image: post.image || "",
     image_pos: post.image_pos || { x: 50, y: 50, zoom: 100 },
-    image_prompt: post.image_prompt || "",
+    image_prompts: post.image_prompts ||
+      (post.image_prompt ? { gradient: post.image_prompt, panels: "", datagrid: "" }
+                         : { gradient: "", panels: "", datagrid: "" }),
     handle: post.handle || "metalifeai.com",
     post_text: post.post_text || "",
     attach_link: post.attach_link !== false,
@@ -341,18 +354,9 @@ async function renderEditor(id) {
           <label class="rng">Zoom <input id="f-pz" type="range" min="100" max="250" value="${m.image_pos.zoom}"></label>
         </div>
 
-        <label class="field">AI image prompt <small style="font-weight:400;color:var(--muted)">— copy into Google Flow / an image generator</small></label>
-        <div class="row">
-          <select id="img-style" style="flex:1">
-            <option value="auto">Style: Auto (best for topic)</option>
-            <option value="gradient">Luminous gradient illustration</option>
-            <option value="panels">3D figure + floating data panels</option>
-            <option value="datagrid">Neon-green data / LiDAR scene</option>
-          </select>
-          <button id="btn-imgprompt" class="btn subtle">✨ Generate prompt</button>
-        </div>
-        <textarea id="f-imgprompt" style="min-height:120px" placeholder="Click ✨ Generate prompt — it writes a Flow-ready prompt in this house style, tailored to this post.">${esc(m.image_prompt || "")}</textarea>
-        <div class="row"><button id="btn-copyprompt" class="btn ghost">⧉ Copy prompt</button></div>
+        <label class="field">AI image prompts <small style="font-weight:400;color:var(--muted)">— one per style; copy any into Google Flow</small></label>
+        <button id="btn-imgprompt" class="btn subtle">✨ Generate all styles</button>
+        <div id="imgprompt-list" style="margin-top:10px"></div>
 
         <label class="field">Full details <small style="font-weight:400;color:var(--muted)">— one paragraph per blank line; auto-flows onto story slides</small></label>
         <textarea id="f-details" style="min-height:160px" placeholder="Paste the full story — paragraphs flow onto extra carousel slides…">${esc((m.details||[]).join("\n\n"))}</textarea>
@@ -528,21 +532,32 @@ async function renderEditor(id) {
   $("f-py").oninput = e => { m.image_pos.y = +e.target.value; refresh(); };
   $("f-pz").oninput = e => { m.image_pos.zoom = +e.target.value; refresh(); };
 
-  // AI image prompt (free text generation — for pasting into Google Flow)
-  $("f-imgprompt").oninput = e => { m.image_prompt = e.target.value; };
+  // AI image prompts — one per style, free text generation for Google Flow
+  function renderImgPrompts() {
+    $("imgprompt-list").innerHTML = IMG_STYLES.map(s => `
+      <div class="ip-block">
+        <div class="ip-head"><span>${s.label}</span><button class="ip-copy" data-k="${s.k}">⧉ Copy</button></div>
+        <textarea class="ip-text" data-k="${s.k}" placeholder="Click ✨ Generate all styles…">${esc(m.image_prompts[s.k] || "")}</textarea>
+      </div>`).join("");
+    $("imgprompt-list").querySelectorAll(".ip-text").forEach(t =>
+      t.oninput = () => { m.image_prompts[t.dataset.k] = t.value; });
+    $("imgprompt-list").querySelectorAll(".ip-copy").forEach(b =>
+      b.onclick = async () => {
+        const v = (m.image_prompts[b.dataset.k] || "").trim();
+        if (!v) { toast("Generate the prompts first", "err"); return; }
+        try { await navigator.clipboard.writeText(v); toast("Copied ⧉", "ok"); }
+        catch { toast("Press Ctrl+C — clipboard blocked", "err"); }
+      });
+  }
+  renderImgPrompts();
   $("btn-imgprompt").onclick = async () => {
-    edStatus("Writing an image prompt with Gemini…");
+    edStatus("Writing image prompts (all styles) with Gemini…");
     try {
-      const out = await geminiImagePrompt(m, $("img-style").value);
-      m.image_prompt = out; $("f-imgprompt").value = out;
-      edStatus("Prompt ready — Copy it into Google Flow."); toast("Image prompt ready ✨", "ok");
+      const out = await geminiImagePrompts(m);
+      m.image_prompts = { ...m.image_prompts, ...out };
+      renderImgPrompts();
+      edStatus("Prompts ready — Copy any style into Google Flow."); toast("Image prompts ready ✨", "ok");
     } catch (e) { edStatus(e.message); toast(e.message, "err"); }
-  };
-  $("btn-copyprompt").onclick = async () => {
-    const t = $("f-imgprompt").value.trim();
-    if (!t) { toast("Generate a prompt first", "err"); return; }
-    try { await navigator.clipboard.writeText(t); toast("Copied to clipboard ⧉", "ok"); }
-    catch { toast("Press Ctrl+C — clipboard blocked", "err"); }
   };
 
   // caption
