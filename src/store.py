@@ -65,6 +65,7 @@ def save_post(post: dict) -> dict:
         "thanks_follow": post.get("thanks_follow", "Follow us for more\nnews and updates of our work"),
         "image": post.get("image", ""),
         "image_pos": post.get("image_pos", {"x": 50, "y": 50, "zoom": 100}),
+        "image_prompt": post.get("image_prompt", ""),
         "handle": post.get("handle", "metalifeai.com"),
         "attach_link": post.get("attach_link", True),
         "status": "draft",            # draft | queued | posted

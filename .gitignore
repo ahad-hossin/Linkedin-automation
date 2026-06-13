@@ -5,3 +5,4 @@ venv/
 .env
 _*.txt
 output/
+example image/

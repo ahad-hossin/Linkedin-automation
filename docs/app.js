@@ -150,6 +150,56 @@ ${text}`;
   throw new Error(`All Gemini keys failed (${lastErr})`);
 }
 
+/* ---------------- AI image-prompt generator (for Google Flow) ---------------- */
+
+// the "house style" distilled from the reference images: dark, cinematic AI/tech
+// editorial art — luminous gradient illustration OR neon-green data/LiDAR scene.
+const IMG_STYLE_SPEC = {
+  shared: `Dark, cinematic AI/tech-editorial image on a deep navy-to-black or deep-purple gradient background. Generous negative space, soft volumetric glow, subtle grain, crisp high detail — the polished look of a top AI company's blog hero image. Single clear concept, balanced composition, premium and modern. No text, no words, no logos, no watermark.`,
+  auto: `Choose the ONE approach that best fits the subject: (A) luminous flat-vector illustration with purple→magenta→teal→orange gradients, smooth glowing shapes, abstract human/brain/device forms, minimal geometric faces with tiny square "pixel" eyes, thin connecting lines and rounded-square icon chips orbiting a central subject; (B) a small silhouetted human figure facing large translucent floating UI panels/dashboards/charts in neon purple-magenta-orange, dark stage, faint grid floor, depth and perspective; or (C) a "world-as-data" scene — glowing neon-green wireframe / point-cloud / LiDAR mesh / grid overlaying a real street, crosswalk, vehicles, pedestrians or trees on near-black, high contrast, sensor-simulation / digital-twin feel. Use (C) for driving, road, vehicle, sensor, AV or pedestrian-detection subjects; (A) or (B) for VR/AR, training, software and research concepts.`,
+  gradient: `Use a luminous flat-vector illustration: purple→magenta→teal→orange gradients, smooth glowing shapes, abstract human/brain/device forms, minimal geometric faces with tiny square "pixel" eyes, thin connecting lines and rounded-square icon chips orbiting a central subject, soft glows on deep navy.`,
+  panels: `Use a cinematic 3D scene: a small silhouetted human figure facing large translucent floating UI panels, dashboards and charts with neon purple-magenta-orange gradients, dark stage, faint grid floor, strong depth and perspective.`,
+  datagrid: `Use a "world-as-data" scene: glowing neon-green wireframe / point-cloud / LiDAR mesh / grid overlaying a real street, crosswalk, vehicles, pedestrians and trees on near-black; high contrast, sensor-simulation / digital-twin / autonomous-vehicle perception feel.`,
+};
+
+const IMGPROMPT_SCHEMA = { type: "object", properties: { image_prompt: { type: "string" } }, required: ["image_prompt"] };
+
+async function geminiImagePrompt(post, style) {
+  const keys = store.geminiKeys;
+  if (!keys.length) throw new Error("Add a Gemini API key in Settings to generate image prompts.");
+  const styleSpec = IMG_STYLE_SPEC[style] || IMG_STYLE_SPEC.auto;
+  const subject = [post.headline || post.title, post.summary, (post.details || []).slice(0, 2).join(" ")]
+    .filter(Boolean).join(" — ").slice(0, 600);
+  const prompt =
+`You write image-generation prompts for Google Flow / Imagen. Produce ONE detailed, copy-paste-ready prompt for a 16:9 hero image that visually represents the LinkedIn post below, in this exact house style.
+
+HOUSE STYLE: ${IMG_STYLE_SPEC.shared} ${styleSpec}
+
+Rules: ground the concept in the post's ACTUAL subject (name the concrete objects/scene — e.g. a driving simulator rig, a VR headset, a crosswalk, an A-pillar blind spot, a LiDAR street scan). Be specific about the central subject, supporting elements, colour palette, lighting, mood and composition. 60-110 words, vivid but concrete. Do NOT include any text/words/UI labels in the image. End the prompt with: "16:9 aspect ratio, ultra-detailed, no text."
+
+POST TOPIC: ${post.topic || ""}
+POST: ${subject}
+
+Output only the prompt.`;
+  const body = {
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: { temperature: 0.6, responseMimeType: "application/json", responseSchema: IMGPROMPT_SCHEMA },
+  };
+  let lastErr = "no keys";
+  for (const key of keys) {
+    let r;
+    try {
+      r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`,
+        { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    } catch (e) { lastErr = e.message; continue; }
+    if (r.status === 429 || r.status === 403) { lastErr = `Gemini ${r.status} — trying next key`; continue; }
+    if (!r.ok) { lastErr = `Gemini ${r.status}: ${(await r.text()).slice(0,140)}`; continue; }
+    const out = (await r.json()).candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+    return (JSON.parse(out).image_prompt || "").trim();
+  }
+  throw new Error(`All Gemini keys failed (${lastErr})`);
+}
+
 /* ---------------- views ---------------- */
 
 const app = () => document.getElementById("app");
@@ -230,6 +280,7 @@ async function renderEditor(id) {
     thanks_follow: post.thanks_follow || "Follow us for more\nnews and updates of our work",
     image: post.image || "",
     image_pos: post.image_pos || { x: 50, y: 50, zoom: 100 },
+    image_prompt: post.image_prompt || "",
     handle: post.handle || "metalifeai.com",
     post_text: post.post_text || "",
     attach_link: post.attach_link !== false,
@@ -272,6 +323,19 @@ async function renderEditor(id) {
           <label class="rng">Vertical <input id="f-py" type="range" min="0" max="100" value="${m.image_pos.y}"></label>
           <label class="rng">Zoom <input id="f-pz" type="range" min="100" max="250" value="${m.image_pos.zoom}"></label>
         </div>
+
+        <label class="field">AI image prompt <small style="font-weight:400;color:var(--muted)">— copy into Google Flow / an image generator</small></label>
+        <div class="row">
+          <select id="img-style" style="flex:1">
+            <option value="auto">Style: Auto (best for topic)</option>
+            <option value="gradient">Luminous gradient illustration</option>
+            <option value="panels">3D figure + floating data panels</option>
+            <option value="datagrid">Neon-green data / LiDAR scene</option>
+          </select>
+          <button id="btn-imgprompt" class="btn subtle">✨ Generate prompt</button>
+        </div>
+        <textarea id="f-imgprompt" style="min-height:120px" placeholder="Click ✨ Generate prompt — it writes a Flow-ready prompt in this house style, tailored to this post.">${esc(m.image_prompt || "")}</textarea>
+        <div class="row"><button id="btn-copyprompt" class="btn ghost">⧉ Copy prompt</button></div>
 
         <label class="field">Full details <small style="font-weight:400;color:var(--muted)">— one paragraph per blank line; auto-flows onto story slides</small></label>
         <textarea id="f-details" style="min-height:160px" placeholder="Paste the full story — paragraphs flow onto extra carousel slides…">${esc((m.details||[]).join("\n\n"))}</textarea>
@@ -445,6 +509,23 @@ async function renderEditor(id) {
   $("f-px").oninput = e => { m.image_pos.x = +e.target.value; refresh(); };
   $("f-py").oninput = e => { m.image_pos.y = +e.target.value; refresh(); };
   $("f-pz").oninput = e => { m.image_pos.zoom = +e.target.value; refresh(); };
+
+  // AI image prompt (free text generation — for pasting into Google Flow)
+  $("f-imgprompt").oninput = e => { m.image_prompt = e.target.value; };
+  $("btn-imgprompt").onclick = async () => {
+    edStatus("Writing an image prompt with Gemini…");
+    try {
+      const out = await geminiImagePrompt(m, $("img-style").value);
+      m.image_prompt = out; $("f-imgprompt").value = out;
+      edStatus("Prompt ready — Copy it into Google Flow."); toast("Image prompt ready ✨", "ok");
+    } catch (e) { edStatus(e.message); toast(e.message, "err"); }
+  };
+  $("btn-copyprompt").onclick = async () => {
+    const t = $("f-imgprompt").value.trim();
+    if (!t) { toast("Generate a prompt first", "err"); return; }
+    try { await navigator.clipboard.writeText(t); toast("Copied to clipboard ⧉", "ok"); }
+    catch { toast("Press Ctrl+C — clipboard blocked", "err"); }
+  };
 
   // caption
   $("f-text").oninput = e => { m.post_text = e.target.value; refresh(); };
