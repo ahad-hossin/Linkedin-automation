@@ -1,0 +1,42 @@
+{
+ "id": "20260613-a6f153b9eb",
+ "title": "Traffic Light Installation at Personette and Fairview",
+ "summary": "A new traffic light is being installed at the intersection of Personette and Fairview to enhance safety for drivers and pedestrians.",
+ "topic": "pedestrian safety",
+ "kind": "news",
+ "source": "Google News",
+ "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOQ05LWkhGSXlXdHVCcGZtRE1yaE1KMVlBanNNbFhJQ3A1UmpRVjVRMENVeGV0eUNPQ3RkTWY3RTN1Y0hnNmpBMl9nVWZ1ZTRmWTRUSUxCTEl5M1pxR2hQdjdjZFYxYlpQZE5NaG1PWjBRZk5qLTZsR3dsWGRibTNjODNUM19HTExpS0xtdE5ZX2x0MU0tdnQ4VHdONWtUX1pNVWxwVVpKZ1g?oc=5",
+ "post_text": "A new traffic light is set to be installed at Personette and Fairview, aiming to enhance safety for both drivers and pedestrians.\n\nThis intersection has been identified as a high-risk zone, particularly for pedestrian accidents. Community feedback has played a crucial role in this decision, emphasizing the need for improved visibility and traffic management.\n\nLocal authorities are committed to monitoring the effectiveness of this new traffic light post-installation. The goal is to reduce accidents and improve overall traffic flow in the area.\n\nWhat additional measures do you think could further enhance safety at this intersection?\n\n#TrafficSafety #PedestrianSafety #UrbanPlanning #RoadSafety #TrafficManagement",
+ "template": "article",
+ "headline": "NEW TRAFFIC LIGHT AT PERSONETTE AND FAIRVIEW",
+ "kicker": "TRAFFIC SAFETY UPDATE",
+ "details": [
+  "The installation of a new traffic light at Personette and Fairview aims to improve safety at a busy intersection.",
+  "Local authorities have identified this area as a high-risk zone for accidents, particularly involving pedestrians.",
+  "The decision comes after community feedback highlighted concerns over visibility and traffic flow at the intersection.",
+  "This initiative reflects a growing recognition of the need for enhanced traffic management solutions in urban areas.",
+  "While the new light is expected to reduce accidents, ongoing monitoring will be necessary to assess its effectiveness."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Crosswalk_of_Market_at_Third%2C_San_Francisco.jpg",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "luminous flat-vector illustration: a glowing abstract human figure standing at a crosswalk, with a vibrant traffic light in the background, minimal geometric shapes representing traffic flow and urban safety, deep navy background with purple to magenta gradients, 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "cinematic 3D scene: a small silhouetted human figure at a busy intersection, facing large translucent floating UI panels displaying traffic data and safety metrics, neon purple-magenta-orange lights illuminating the scene, dark stage with faint grid floor, strong depth and perspective, 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "world-as-data scene: glowing neon-green wireframe overlay of the Personette and Fairview intersection, with a detailed point-cloud representation of vehicles and pedestrians, highlighting traffic flow and safety features, near-black background, high-contrast sensor-simulation feel, 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-13T18:16:42Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}
