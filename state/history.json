@@ -106,5 +106,41 @@
   "source": "arXiv",
   "status": "drafted",
   "at": "2026-06-13T05:33:48Z"
+ },
+ {
+  "title_hash": "1bef687236668347",
+  "url": "https://arxiv.org/abs/2606.07016v1",
+  "headline": "Integrated Roadside Sensing and V2X for VRU Safety at Intersections",
+  "topic": "vru_roadside_sensing_communication",
+  "source": "arXiv",
+  "status": "drafted",
+  "at": "2026-06-13T05:45:07Z"
+ },
+ {
+  "title_hash": "594c8343d23815f0",
+  "url": "https://arxiv.org/abs/2606.04992v1",
+  "headline": "AR Guidance for Surgical Instrument Handling",
+  "topic": "ar_surgical_guidance_system",
+  "source": "arXiv",
+  "status": "skipped",
+  "at": "2026-06-13T05:45:21Z"
+ },
+ {
+  "title_hash": "58b79d3b3ceeab3e",
+  "url": "https://roadtovr.com/picos-flagship-xr-headset-leaked-video-vision-pro-galaxy-xr/",
+  "headline": "Pico Project Swan Leak",
+  "topic": "pico_qualcomm_xr_chipset_leak",
+  "source": "Road to VR",
+  "status": "drafted",
+  "at": "2026-06-13T05:47:11Z"
+ },
+ {
+  "title_hash": "a1c3b159352223ec",
+  "url": "https://roadtovr.com/qualcomm-next-gen-snapdragon-xr-pico-swan/",
+  "headline": "Pico Project Swan Leak",
+  "topic": "pico_qualcomm_xr_chipset_leak",
+  "source": "Road to VR",
+  "status": "drafted",
+  "at": "2026-06-13T05:47:11Z"
  }
 ]

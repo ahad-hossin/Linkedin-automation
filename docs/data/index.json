@@ -1,5 +1,31 @@
 [
  {
+  "id": "20260613-ad58b3d7bd",
+  "title": "Pico Project Swan Leak",
+  "summary": "",
+  "topic": "virtual reality",
+  "kind": "news",
+  "source": "Road to VR",
+  "url": "https://roadtovr.com/picos-flagship-xr-headset-leaked-video-vision-pro-galaxy-xr/",
+  "status": "draft",
+  "created_at": "2026-06-13T05:47:11Z",
+  "posted_at": "",
+  "linkedin_url": ""
+ },
+ {
+  "id": "20260613-ec4af9b98e",
+  "title": "Integrated Roadside Sensing and V2X for VRU Safety at Intersections",
+  "summary": "A new framework combines multi-modal sensors, edge analytics, and V2X/P2X communication in a single cabinet to protect vulnerable road users at signalized intersections, addressing a critical gap in current systems.",
+  "topic": "pedestrian safety",
+  "kind": "research",
+  "source": "arXiv",
+  "url": "https://arxiv.org/abs/2606.07016v1",
+  "status": "draft",
+  "created_at": "2026-06-13T05:45:07Z",
+  "posted_at": "",
+  "linkedin_url": ""
+ },
+ {
   "id": "20260613-697c2f3215",
   "title": "FreqKD: Frequency-Decoupled Knowledge Distillation for IR Object Detection",
   "summary": "A new approach, FreqKD, tackles the challenge of transferring knowledge from RGB to infrared imagery for object detection. It decouples knowledge distillation by spatial frequency, recognizing varying alignment across low and high-frequency components.",
