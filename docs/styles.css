@@ -126,6 +126,8 @@ a:hover { color: var(--accent-ink); }
 .btn.primary:hover { background: #0a5bcf; box-shadow: 0 8px 22px -7px rgba(6,103,225,.7); }
 .btn.ok { background: var(--ok); color: #fff; box-shadow: 0 6px 16px -7px rgba(12,122,74,.6); }
 .btn.ok:hover { background: #0a6c41; }
+.btn.danger { background: var(--danger-bg); color: var(--danger); }
+.btn.danger:hover { background: #f6d9d2; }
 .btn.subtle { background: var(--accent-soft); color: var(--accent-ink); border-color: #d5e6fb; }
 .btn.subtle:hover { background: #ddebfd; border-color: #c2dcfa; }
 .btn.ghost { background: var(--surface); border-color: var(--line-strong); color: var(--muted); }

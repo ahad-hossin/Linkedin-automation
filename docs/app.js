@@ -90,6 +90,23 @@ async function dispatchWorkflow(file, inputs) {
     throw new Error(`dispatch ${r.status}: ${(await r.text()).slice(0,160)}`);
 }
 
+async function ghDeleteFile(path, sha, message) {
+  const r = await fetch(`https://api.github.com/repos/${store.repo}/contents/${path}`,
+    { method: "DELETE", headers: ghHeaders(), body: JSON.stringify({ message, sha }) });
+  if (!r.ok) throw new Error(`GitHub DELETE ${r.status}: ${(await r.text()).slice(0,160)}`);
+}
+
+/* Delete a post: remove its file and drop it from index.json. */
+async function deletePost(id) {
+  if (!store.ghtoken || !store.repo) throw new Error("Set your GitHub repo and token in Settings first.");
+  const existing = await ghGetFile(`${POSTS_PATH}/${id}.json`);
+  if (existing) await ghDeleteFile(`${POSTS_PATH}/${id}.json`, existing.sha, `studio: delete ${id}`);
+  const idxFile = await ghGetFile(INDEX_PATH);
+  let index = idxFile ? JSON.parse(decodeURIComponent(escape(atob(idxFile.content)))) : [];
+  index = index.filter(e => e.id !== id);
+  await ghPutFile(INDEX_PATH, index, `studio: deindex ${id}`);
+}
+
 /* Save the edited post and keep index.json in sync (single source of truth). */
 async function persistPost(record) {
   if (!store.ghtoken || !store.repo) throw new Error("Set your GitHub repo and token in Settings first.");
@@ -367,6 +384,7 @@ async function renderEditor(id) {
         <div class="toolbar" style="margin-top:16px">
           <button id="btn-save" class="btn primary">Save changes</button>
           <button id="btn-post" class="btn ok">Post to LinkedIn ▸</button>
+          <button id="btn-delete" class="btn danger" title="Delete this post">🗑 Delete</button>
         </div>
         <p class="hint" id="ed-status"></p>
         <p class="hint">
@@ -592,6 +610,17 @@ async function renderEditor(id) {
       post = rec;
       edStatus("Queued. Posting now — refresh in a minute for the LinkedIn link.");
       toast("Queued for LinkedIn ▸", "ok");
+    } catch (e) { edStatus(e.message); toast(e.message, "err"); }
+  };
+
+  $("btn-delete").onclick = async () => {
+    if (!confirm("Delete this post permanently? It is removed from the repo and the site.")) return;
+    edStatus("Deleting…");
+    try {
+      await deletePost(post.id);
+      state.index = state.index.filter(e => e.id !== post.id); // update gallery instantly
+      toast("Post deleted", "ok");
+      location.hash = "#/";
     } catch (e) { edStatus(e.message); toast(e.message, "err"); }
   };
 
