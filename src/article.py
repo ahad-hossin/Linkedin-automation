@@ -7,18 +7,24 @@ from bs4 import BeautifulSoup
 from .feeds import http_get
 
 
-def fetch_article(url: str) -> str:
-    """Returns the article body text ('' on failure)."""
+def fetch_article(url: str) -> dict:
+    """Returns {"text": str, "image": str} (og:image); empty strings on failure."""
+    out = {"text": "", "image": ""}
     try:
         resp = http_get(url)
         if resp.status_code != 200:
-            return ""
+            return out
         html = resp.text
     except Exception as e:
         print(f"  [warn] article fetch failed {url}: {e}")
-        return ""
+        return out
 
     soup = BeautifulSoup(html, "html.parser")
+    og = soup.find("meta", attrs={"property": "og:image"}) or \
+        soup.find("meta", attrs={"name": "og:image"})
+    if og and og.get("content"):
+        out["image"] = og["content"].strip()
+
     scope = (soup.find("article")
              or soup.find(class_=re.compile(r"(article|news|post|details?)[-_]?(body|content|details)", re.I))
              or soup)
@@ -33,4 +39,5 @@ def fetch_article(url: str) -> str:
             soup.find("meta", attrs={"name": "description"})
         if d and d.get("content"):
             text = d["content"].strip()
-    return text[:5000]
+    out["text"] = text[:5000]
+    return out

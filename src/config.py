@@ -69,6 +69,9 @@ GH_MODELS_DAILY_LIMIT = int(os.environ.get("GH_MODELS_DAILY_LIMIT", "140"))
 
 LINKEDIN_DAILY_LIMIT = int(os.environ.get("LINKEDIN_DAILY_LIMIT", "10"))
 
+# Handle shown in the slide footer (the Meta Life design). Override per brand.
+BRAND_HANDLE = os.environ.get("BRAND_HANDLE", "metalifeai.com")
+
 # --- History / dedup ---
 HISTORY_KEEP = 600          # entries kept in state/history.json
 HISTORY_FOR_DEDUP = 120     # recent topics shown to the AI for dedup

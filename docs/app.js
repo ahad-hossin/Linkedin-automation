@@ -200,110 +200,231 @@ async function renderEditor(id) {
   try { post = await loadPost(id); }
   catch { app().innerHTML = `<div class="empty"><h2>Not found</h2><a href="#/">← Back</a></div>`; return; }
 
-  if (post.attach_link === undefined) post.attach_link = true;
+  // working model (defaults fill older drafts)
+  const m = {
+    title: post.title || "",
+    template: post.template || "article",
+    headline: post.headline || post.title || "",
+    kicker: post.kicker || "",
+    summary: post.summary || "",
+    detail_slides: JSON.parse(JSON.stringify(post.detail_slides || [])),
+    thank_you: post.thank_you !== false,
+    thanks_title: post.thanks_title || "THANK YOU",
+    thanks_subtitle: post.thanks_subtitle || "Follow for more on VR, AR and road safety.",
+    image: post.image || "",
+    image_pos: post.image_pos || { x: 50, y: 50, zoom: 100 },
+    handle: post.handle || "metalifeai.com",
+    post_text: post.post_text || "",
+    attach_link: post.attach_link !== false,
+  };
 
   app().innerHTML = `
     <a class="back-link" href="#/">← All posts</a>
     <div class="editor">
-      <div class="panel">
-        <h2>Edit post</h2>
-        <label class="field">Title (internal)</label>
-        <input id="f-title" type="text" value="${escAttr(post.title)}" />
+      <div class="panel" style="max-height:none">
+        <h2>Edit carousel</h2>
 
-        <label class="field">Post text</label>
+        <label class="field">Lead template</label>
+        <div class="seg" id="seg-template">
+          <button data-t="article" class="${m.template==='article'?'on':''}">Article<small>headline + summary</small></button>
+          <button data-t="cover" class="${m.template==='cover'?'on':''}">Cover<small>kicker + big title</small></button>
+        </div>
+
+        <div id="fld-kicker" style="${m.template==='cover'?'':'display:none'}">
+          <label class="field">Kicker (cover, ALL-CAPS lead-in)</label>
+          <input id="f-kicker" type="text" value="${escAttr(m.kicker)}" />
+        </div>
+
+        <label class="field" id="lbl-headline">${m.template==='cover'?'Big title':'Headline'}</label>
+        <input id="f-headline" type="text" value="${escAttr(m.headline)}" />
+
+        <div id="fld-summary" style="${m.template==='cover'?'display:none':''}">
+          <label class="field">Summary (subtext on lead slide)</label>
+          <textarea id="f-summary" style="min-height:80px">${esc(m.summary)}</textarea>
+        </div>
+
+        <label class="field">Lead image</label>
+        <div class="row">
+          <button id="btn-upload" class="btn subtle">⬆ Upload image</button>
+          <button id="btn-rmimg" class="btn ghost" ${m.image?'':'disabled'}>Remove</button>
+          <input id="f-file" type="file" accept="image/*" hidden />
+        </div>
+        <input id="f-imgurl" type="text" placeholder="…or paste an image URL" value="${m.image && /^https?:/.test(m.image) ? escAttr(m.image):''}" style="margin-top:8px" />
+        <div id="img-controls" style="${m.image?'':'display:none'}">
+          <label class="rng">Horizontal <input id="f-px" type="range" min="0" max="100" value="${m.image_pos.x}"></label>
+          <label class="rng">Vertical <input id="f-py" type="range" min="0" max="100" value="${m.image_pos.y}"></label>
+          <label class="rng">Zoom <input id="f-pz" type="range" min="100" max="250" value="${m.image_pos.zoom}"></label>
+        </div>
+
+        <label class="field" style="display:flex;justify-content:space-between;align-items:center">
+          Detail slides <button id="btn-addslide" class="btn ghost" style="padding:4px 12px">+ Add</button>
+        </label>
+        <div id="detail-list"></div>
+
+        <label class="checkbox" style="margin-top:14px"><input id="f-ty" type="checkbox" ${m.thank_you?'checked':''}/> Thank-you end slide</label>
+        <div id="fld-thanks" style="${m.thank_you?'':'display:none'}">
+          <input id="f-tytitle" type="text" value="${escAttr(m.thanks_title)}" style="margin-top:8px" />
+          <input id="f-tysub" type="text" value="${escAttr(m.thanks_subtitle)}" style="margin-top:8px" />
+        </div>
+
+        <label class="field">Footer handle</label>
+        <input id="f-handle" type="text" value="${escAttr(m.handle)}" />
+
+        <label class="field">LinkedIn caption</label>
         <div class="toolbar">
           <button id="btn-polish" class="btn subtle">✦ Polish to LinkedIn style</button>
           <button id="btn-translate" class="btn subtle">🌐 Translate &amp; format</button>
         </div>
-        <textarea id="f-text" class="post">${esc(post.post_text)}</textarea>
+        <textarea id="f-text" class="post">${esc(m.post_text)}</textarea>
         <div class="charcount"><span id="cc">0</span> chars</div>
-
-        <label class="checkbox"><input id="f-link" type="checkbox" ${post.attach_link ? "checked":""}/> Attach source link to the post</label>
+        <label class="checkbox"><input id="f-link" type="checkbox" ${m.attach_link?'checked':''}/> Add source link in the comments note</label>
 
         <div class="toolbar" style="margin-top:16px">
           <button id="btn-save" class="btn primary">Save changes</button>
           <button id="btn-post" class="btn ok">Post to LinkedIn ▸</button>
         </div>
         <p class="hint" id="ed-status"></p>
+        <p class="hint">
+          Status: <b>${titleCase(post.status)}</b>${post.linkedin_url && String(post.linkedin_url).startsWith("http") ? ` · <a href="${post.linkedin_url}" target="_blank">view on LinkedIn</a>` : ""} ·
+          Source: <a href="${escAttr(post.url)}" target="_blank">${escAttr(post.source)}</a>
+          ${post.last_error ? `<br><span style="color:var(--danger)">Last error: ${esc(post.last_error)}</span>` : ""}
+        </p>
       </div>
 
       <div class="panel">
-        <h2>Preview</h2>
+        <h2>Carousel preview</h2>
+        <div id="slides-preview" class="slides-preview"></div>
+        <h2 style="margin-top:20px">Caption</h2>
         <div class="li-preview">
-          <div class="li-head">
-            <div class="li-avatar">in</div>
-            <div><div class="li-name">Your Name</div><div class="li-sub">VR / Road-safety · Now</div></div>
-          </div>
+          <div class="li-head"><div class="li-avatar">in</div>
+            <div><div class="li-name">Your Name</div><div class="li-sub">VR / Road-safety · Now</div></div></div>
           <div class="li-body" id="pv-body"></div>
-          <div class="li-link" id="pv-link">
-            <div class="t">${escAttr(post.title)}</div>
-            <div class="li-sub">${escAttr(hostOf(post.url))}</div>
-          </div>
         </div>
-        <p class="hint" style="margin-top:14px">
-          Status: <b>${titleCase(post.status)}</b>${post.linkedin_url && post.linkedin_url.startsWith("http") ? ` · <a href="${post.linkedin_url}" target="_blank">view on LinkedIn</a>` : ""}<br>
-          Source: <a href="${escAttr(post.url)}" target="_blank">${escAttr(post.source)}</a><br>
-          ${post.last_error ? `<span style="color:var(--danger)">Last error: ${esc(post.last_error)}</span>` : ""}
-        </p>
       </div>
     </div>`;
 
-  const ta = document.getElementById("f-text");
-  const linkBox = document.getElementById("pv-link");
-  const updatePreview = () => {
-    document.getElementById("pv-body").textContent = ta.value;
-    document.getElementById("cc").textContent = ta.value.length;
-    linkBox.style.display = document.getElementById("f-link").checked ? "block" : "none";
-  };
-  ta.oninput = updatePreview;
-  document.getElementById("f-link").onchange = updatePreview;
-  updatePreview();
+  const $ = s => document.getElementById(s);
+  const edStatus = (t) => $("ed-status").textContent = t;
 
-  const collect = () => ({
-    ...post,
-    title: document.getElementById("f-title").value.trim(),
-    post_text: ta.value.trim(),
-    attach_link: document.getElementById("f-link").checked,
+  function refresh() {
+    // slide previews
+    const slides = window.MLSlides.postToSlides(m);
+    $("slides-preview").innerHTML = slides.map((s, i) =>
+      `<div class="slide-scale"><div class="ml-slide">${window.MLSlides.mlSlideMarkup(s, {handle: m.handle})}</div>
+        <span class="slide-num">${i + 1}</span></div>`).join("");
+    // caption
+    $("pv-body").textContent = m.post_text;
+    $("cc").textContent = m.post_text.length;
+  }
+
+  function renderDetailList() {
+    $("detail-list").innerHTML = m.detail_slides.map((d, i) => `
+      <div class="detail-card" data-i="${i}">
+        <div class="row" style="justify-content:space-between">
+          <input class="d-head" data-i="${i}" type="text" value="${escAttr(d.heading||'')}" placeholder="SLIDE HEADING" style="font-weight:600"/>
+          <button class="btn ghost d-del" data-i="${i}" style="padding:4px 10px">✕</button>
+        </div>
+        <textarea class="d-paras" data-i="${i}" style="min-height:90px;margin-top:6px" placeholder="One paragraph per blank line…">${esc((d.paragraphs||[]).join("\n\n"))}</textarea>
+      </div>`).join("") || `<p class="hint">No detail slides. Add one to expand the story.</p>`;
+    $("detail-list").querySelectorAll(".d-head").forEach(el => el.oninput = () => { m.detail_slides[+el.dataset.i].heading = el.value; refresh(); });
+    $("detail-list").querySelectorAll(".d-paras").forEach(el => el.oninput = () => { m.detail_slides[+el.dataset.i].paragraphs = el.value.split(/\n{2,}/).map(s=>s.trim()).filter(Boolean); refresh(); });
+    $("detail-list").querySelectorAll(".d-del").forEach(el => el.onclick = () => { m.detail_slides.splice(+el.dataset.i,1); renderDetailList(); refresh(); });
+  }
+
+  // template toggle
+  $("seg-template").querySelectorAll("button").forEach(b => b.onclick = () => {
+    m.template = b.dataset.t;
+    $("seg-template").querySelectorAll("button").forEach(x => x.classList.toggle("on", x.dataset.t === m.template));
+    $("fld-kicker").style.display = m.template === "cover" ? "" : "none";
+    $("fld-summary").style.display = m.template === "cover" ? "none" : "";
+    $("lbl-headline").textContent = m.template === "cover" ? "Big title" : "Headline";
+    refresh();
   });
-  const edStatus = (m) => document.getElementById("ed-status").textContent = m;
 
-  document.getElementById("btn-polish").onclick = () => runPolish(ta, "");
-  document.getElementById("btn-translate").onclick = () => runPolish(ta, "The text may be in another language; translate it to English.");
+  // text fields
+  $("f-headline").oninput = e => { m.headline = e.target.value; refresh(); };
+  $("f-kicker").oninput = e => { m.kicker = e.target.value; refresh(); };
+  $("f-summary").oninput = e => { m.summary = e.target.value; refresh(); };
+  $("f-handle").oninput = e => { m.handle = e.target.value; refresh(); };
+  $("f-tytitle").oninput = e => { m.thanks_title = e.target.value; refresh(); };
+  $("f-tysub").oninput = e => { m.thanks_subtitle = e.target.value; refresh(); };
+  $("f-ty").onchange = e => { m.thank_you = e.target.checked; $("fld-thanks").style.display = e.target.checked ? "" : "none"; refresh(); };
 
-  async function runPolish(textarea, instruction) {
+  // image
+  $("btn-upload").onclick = () => $("f-file").click();
+  $("f-file").onchange = async e => {
+    const file = e.target.files[0]; if (!file) return;
+    m.image = await downscaleToDataUrl(file, 1400);
+    $("f-imgurl").value = ""; $("btn-rmimg").disabled = false; $("img-controls").style.display = ""; refresh();
+  };
+  $("f-imgurl").oninput = e => { m.image = e.target.value.trim(); $("btn-rmimg").disabled = !m.image; $("img-controls").style.display = m.image ? "" : "none"; refresh(); };
+  $("btn-rmimg").onclick = () => { m.image = ""; $("f-imgurl").value=""; $("f-file").value=""; $("btn-rmimg").disabled = true; $("img-controls").style.display = "none"; refresh(); };
+  $("f-px").oninput = e => { m.image_pos.x = +e.target.value; refresh(); };
+  $("f-py").oninput = e => { m.image_pos.y = +e.target.value; refresh(); };
+  $("f-pz").oninput = e => { m.image_pos.zoom = +e.target.value; refresh(); };
+
+  // detail add
+  $("btn-addslide").onclick = () => { m.detail_slides.push({ heading: "DETAILS", paragraphs: [""] }); renderDetailList(); refresh(); };
+
+  // caption
+  $("f-text").oninput = e => { m.post_text = e.target.value; refresh(); };
+  $("f-link").onchange = e => { m.attach_link = e.target.checked; };
+  $("btn-polish").onclick = () => runPolish("");
+  $("btn-translate").onclick = () => runPolish("The text may be in another language; translate it to English.");
+
+  async function runPolish(instruction) {
     edStatus("Polishing with Gemini…");
     try {
-      const out = await geminiPolish(textarea.value, instruction);
-      textarea.value = out; updatePreview(); edStatus("Done. Review and Save when happy.");
-      toast("Rewritten ✦", "ok");
+      const out = await geminiPolish(m.post_text, instruction);
+      m.post_text = out; $("f-text").value = out; refresh();
+      edStatus("Rewritten. Review and Save."); toast("Rewritten ✦", "ok");
     } catch (e) { edStatus(e.message); toast(e.message, "err"); }
   }
 
-  document.getElementById("btn-save").onclick = async () => {
-    const rec = collect(); edStatus("Saving to GitHub…");
-    try { await persistPost(rec); post = rec; edStatus("Saved."); toast("Saved to repo", "ok"); }
+  const collect = () => ({ ...post, ...m, title: ($("f-headline").value.trim() || post.title) });
+
+  $("btn-save").onclick = async () => {
+    edStatus("Saving to GitHub…");
+    try { const rec = collect(); await persistPost(rec); post = rec; edStatus("Saved."); toast("Saved to repo", "ok"); }
     catch (e) { edStatus(e.message); toast(e.message, "err"); }
   };
 
-  document.getElementById("btn-post").onclick = async () => {
+  $("btn-post").onclick = async () => {
     if (!store.liToken || !store.liUrn) {
-      edStatus("Add your LinkedIn access token and author URN in Settings first.");
+      edStatus("Add your LinkedIn token + author URN in Settings first.");
       toast("LinkedIn credentials missing — see Settings", "err"); return;
     }
-    if (!confirm("Queue this post for LinkedIn? The publish workflow will send it within a minute.")) return;
-    const rec = { ...collect(), status: "queued" };
+    if (!confirm("Queue this carousel for LinkedIn? The publish workflow renders the slides and posts within a minute.")) return;
     edStatus("Queuing + triggering publish workflow…");
     try {
+      const rec = { ...collect(), status: "queued" };
       await persistPost(rec);
-      await dispatchWorkflow("publish.yml", {
-        linkedin_token: store.liToken,
-        linkedin_urn: store.liUrn,
-      });
+      await dispatchWorkflow("publish.yml", { linkedin_token: store.liToken, linkedin_urn: store.liUrn });
       post = rec;
-      edStatus("Queued. The workflow is posting it now — refresh in a minute to see the LinkedIn link.");
+      edStatus("Queued. Posting now — refresh in a minute for the LinkedIn link.");
       toast("Queued for LinkedIn ▸", "ok");
     } catch (e) { edStatus(e.message); toast(e.message, "err"); }
   };
+
+  renderDetailList();
+  refresh();
+  setPill(`Editing · ${titleCase(post.status)}`);
+}
+
+/* downscale an uploaded image and return a JPEG data URL (keeps repo JSON small) */
+function downscaleToDataUrl(file, maxDim) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      let { width: w, height: h } = img;
+      if (Math.max(w, h) > maxDim) { const r = maxDim / Math.max(w, h); w = Math.round(w*r); h = Math.round(h*r); }
+      const c = document.createElement("canvas"); c.width = w; c.height = h;
+      c.getContext("2d").drawImage(img, 0, 0, w, h);
+      resolve(c.toDataURL("image/jpeg", 0.85));
+    };
+    img.onerror = () => reject(new Error("could not read image"));
+    img.src = URL.createObjectURL(file);
+  });
 }
 
 /* trigger the generate workflow, passing the browser-held AI keys as one-time

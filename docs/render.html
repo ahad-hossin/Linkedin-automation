@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Slide fonts. The server renderer waits for document.fonts.ready. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    html, body { margin: 0; padding: 0; background: #0e1024; }
+    #slides { display: flex; flex-direction: column; gap: 40px; padding: 40px; }
+    .ml-slide { width: 1080px; height: 1080px; position: relative; overflow: hidden; background: #121331; }
+  </style>
+  <script src="slide-render.js"></script>
+</head>
+<body>
+  <div id="slides"></div>
+  <script>
+    // Render slides from window.__SLIDES__ (set by Playwright via addInitScript
+    // or by ?data=<base64-json>). Each becomes a .ml-slide div the renderer
+    // screenshots individually.
+    function getData() {
+      if (window.__SLIDES__) return window.__SLIDES__;
+      const m = new URLSearchParams(location.search).get("data");
+      if (m) { try { return JSON.parse(decodeURIComponent(escape(atob(m)))); } catch (e) {} }
+      return { handle: "metalifeai.com", slides: [
+        { type: "cover", kicker: "STEP INTO THE NEXT GENERATION", title: "Apple Vision Pro: Next-gen headset" },
+        { type: "article", headline: "Apple Vision Pro: Next-gen headset",
+          summary: "Apple Vision Pro offers a wide range of activities and runs on visionOS, with its own App Store." },
+        { type: "detail", heading: "WHAT THE STUDY FOUND",
+          paragraphs: ["A driving-simulator trial measured how quickly drivers checked their blind spot.",
+                       "Participants using the VR overlay missed 30% fewer hazards than the control group."] },
+        { type: "thanks", title: "THANK YOU", subtitle: "Follow for more on VR, AR and road safety." }
+      ] };
+    }
+    function build() {
+      const data = getData();
+      const wrap = document.getElementById("slides");
+      wrap.innerHTML = "";
+      // accept either {slides:[…]} or {post:{…}} (built via postToSlides)
+      const slides = data.slides || (data.post ? window.MLSlides.postToSlides(data.post) : []);
+      slides.forEach((s, i) => {
+        const div = document.createElement("div");
+        div.className = "ml-slide";
+        div.id = "slide-" + i;
+        div.innerHTML = window.MLSlides.mlSlideMarkup(s, { handle: data.handle });
+        wrap.appendChild(div);
+      });
+      window.__SLIDES_READY__ = true;
+    }
+    build();
+    window.renderSlides = build;
+  </script>
+</body>
+</html>

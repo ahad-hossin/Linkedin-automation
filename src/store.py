@@ -53,7 +53,19 @@ def save_post(post: dict) -> dict:
         "source": post.get("source", ""),
         "url": post.get("url", ""),
         "post_text": post["post_text"],
-        "status": "draft",            # draft | posted
+        # --- carousel slide fields (the exact Meta Life design) ---
+        "template": post.get("template", "article"),
+        "headline": post.get("headline", post["title"]),
+        "kicker": post.get("kicker", ""),
+        "detail_slides": post.get("detail_slides", []),
+        "thank_you": post.get("thank_you", True),
+        "thanks_title": post.get("thanks_title", "THANK YOU"),
+        "thanks_subtitle": post.get("thanks_subtitle", "Follow for more on VR, AR and road safety."),
+        "image": post.get("image", ""),
+        "image_pos": post.get("image_pos", {"x": 50, "y": 50, "zoom": 100}),
+        "handle": post.get("handle", "metalifeai.com"),
+        "attach_link": post.get("attach_link", True),
+        "status": "draft",            # draft | queued | posted
         "created_at": _now(),
         "posted_at": "",
         "linkedin_url": "",

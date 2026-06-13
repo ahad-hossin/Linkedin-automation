@@ -85,12 +85,13 @@ def generate() -> int:
             break
         cluster = item["cluster"]
         primary = cluster[0]
-        body_text = ""
+        body_text, image_url = "", ""
         if primary["kind"] == "news":  # arXiv abstract already in description
-            body_text = article.fetch_article(primary["url"])
+            art = article.fetch_article(primary["url"])
+            body_text, image_url = art["text"], art["image"]
 
         try:
-            post = brain.compose_post(item, body_text)
+            post = brain.compose_post(item, body_text, image_url)
         except Exception as e:
             print(f"  [warn] compose failed for '{item['topic_key']}': {e}")
             continue
@@ -144,9 +145,7 @@ def publish() -> int:
         if not record:
             continue
         print(f"== Publishing: {record['title'][:70]} ==")
-        # attach the source link unless the author opted out
-        link = record.get("url", "") if record.get("attach_link", True) else ""
-        result = pub.publish_text(record["post_text"], link, record.get("title", ""))
+        result = pub.publish_post(record)
         status = result.get("status")
         if status == "posted":
             record["status"] = "posted"

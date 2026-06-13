@@ -100,19 +100,41 @@ _COMPOSE_SCHEMA = {
     "type": "object",
     "properties": {
         "title": {"type": "string", "description": "short internal title for the dashboard list, max 90 chars, plain factual English"},
-        "post_text": {"type": "string", "description": "the complete LinkedIn post text, ready to publish: hook line, blank-line-separated short paragraphs, source credit, closing question, then 3-5 hashtags on the final line"},
-        "summary": {"type": "string", "description": "1-2 plain sentences describing the item, max 220 chars, for the dashboard card"},
+        "template": {"type": "string", "enum": ["article", "cover"], "description": "'cover' for a bold statement-style lead (short kicker + big punchy title); 'article' for a headline + explanatory subtext. Pick 'cover' for launches/announcements/striking single facts, 'article' for studies and nuanced findings."},
+        "headline": {"type": "string", "description": "the on-image headline. For 'article': the main headline (max ~80 chars, Bebas Neue, will render in caps). For 'cover': the big display title (max ~60 chars)."},
+        "kicker": {"type": "string", "description": "cover template only: a short ALL-CAPS lead-in line above the title, max ~38 chars (e.g. 'NEW DRIVING-SIM RESEARCH'). Empty for article."},
+        "summary": {"type": "string", "description": "article template: 1-2 sentence subtext under the headline on the cover slide, max 200 chars. Also used as the dashboard card summary."},
+        "detail_slides": {
+            "type": "array",
+            "description": "1-3 extra carousel slides that tell the fuller story. Each has a short ALL-CAPS heading and 1-3 short paragraphs (2-3 sentences each). Put the most important facts first. Keep total readable on a phone.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "heading": {"type": "string", "description": "short ALL-CAPS slide heading, e.g. 'WHAT THE STUDY FOUND', 'WHY IT MATTERS'"},
+                    "paragraphs": {"type": "array", "items": {"type": "string"}},
+                },
+                "required": ["heading", "paragraphs"],
+            },
+        },
+        "post_text": {"type": "string", "description": "the complete LinkedIn CAPTION, ready to publish: hook line, blank-line-separated short paragraphs, source credit, closing question, then 3-5 hashtags on the final line"},
         "topic": {"type": "string", "enum": ["virtual reality", "augmented reality", "driving simulation", "driver blind zone", "pedestrian safety"]},
         "relevance": {"type": "string", "enum": ["high", "medium", "off_topic"], "description": "off_topic if, on reading the full text, this is not actually about the focus areas"},
     },
-    "required": ["title", "post_text", "summary", "topic", "relevance"],
+    "required": ["title", "template", "headline", "summary", "detail_slides", "post_text", "topic", "relevance"],
 }
 
-_COMPOSE_PROMPT = """You write LinkedIn posts for a professional working in virtual reality, augmented reality, driving simulation, driver blind zones, and pedestrian safety.
+_COMPOSE_PROMPT = """You create LinkedIn carousel posts for a professional working in virtual reality, augmented reality, driving simulation, driver blind zones, and pedestrian safety.
 
-Write the LinkedIn post for the item below. FACTS ONLY — never invent results, numbers or claims beyond what the material supports. No clickbait, no hype words ("game-changer", "revolutionary", "mind-blowing").
+You produce TWO things for the item below: (A) the on-image carousel slide text, and (B) the LinkedIn caption. FACTS ONLY — never invent results, numbers or claims beyond what the material supports. No clickbait, no hype words ("game-changer", "revolutionary", "mind-blowing").
 
-LinkedIn structure rules (follow exactly):
+(A) CAROUSEL SLIDES — text that will be typeset onto a designed image:
+- Lead slide: choose template 'cover' (short ALL-CAPS kicker + a big punchy title) for launches/announcements/striking single facts; or 'article' (a headline + a 1-2 sentence subtext) for studies and nuanced findings.
+- headline: concrete and specific. Keep it short — it renders large.
+- kicker (cover only): a short ALL-CAPS category/lead-in.
+- summary (article): the second-punch detail in 1-2 sentences.
+- detail_slides: 1-3 slides, each a short ALL-CAPS heading + 1-3 short paragraphs telling the fuller story (what/who/numbers/why it matters/what's next). Most important facts first. For a research paper: method (simulator study, field test, dataset, N participants if given), main finding, one limitation/open question. Keep each paragraph phone-readable.
+
+(B) LinkedIn CAPTION (post_text) — structure rules (follow exactly):
 - Line 1: a strong, specific hook — the most striking finding, number or tension in one sentence (max ~140 chars). It must work alone, because it's all people see before "...see more". Never start with "I'm excited" or "Thrilled to share".
 - Blank line, then 2-4 SHORT paragraphs (1-3 sentences each, separated by blank lines): what was done or announced, the key result with concrete numbers where available, and why it matters for the field (safety, training, design, policy).
 - Professional but human tone. First-person observation is welcome ("What stands out to me is..."). At most 1-2 emojis, only if natural; zero is fine.
@@ -340,7 +362,7 @@ def select_items(candidates: list, history: list) -> list:
     return items
 
 
-def compose_post(selected: dict, body_text: str) -> dict:
+def compose_post(selected: dict, body_text: str, image_url: str = "") -> dict:
     """Phase 2 -> draft post content for one selected item."""
     cluster = selected["cluster"]
     primary = cluster[0]
@@ -352,6 +374,12 @@ def compose_post(selected: dict, body_text: str) -> dict:
         text=text[:4500] or "(text unavailable — use only the title; keep claims minimal)",
     )
     p = _call_llm([{"text": prompt}], _COMPOSE_SCHEMA)
+    detail_slides = []
+    for d in p.get("detail_slides", [])[:3]:
+        paras = [s.strip() for s in d.get("paragraphs", []) if s.strip()][:3]
+        if paras:
+            detail_slides.append({"heading": (d.get("heading") or "DETAILS").upper()[:40],
+                                  "paragraphs": paras})
     return {
         "topic_key": selected["topic_key"],
         "title": p["title"][:120],
@@ -359,6 +387,16 @@ def compose_post(selected: dict, body_text: str) -> dict:
         "summary": p["summary"][:260],
         "topic": p.get("topic", primary["topic"]),
         "relevance": p.get("relevance", "medium"),
+        # --- carousel slide fields (the exact Meta Life design) ---
+        "template": p.get("template", "article"),
+        "headline": p.get("headline", p["title"])[:120],
+        "kicker": (p.get("kicker") or "").upper()[:40],
+        "detail_slides": detail_slides,
+        "thank_you": True,
+        "image": image_url,                  # og:image / arXiv preview if any
+        "image_pos": {"x": 50, "y": 50, "zoom": 100},
+        "handle": config.BRAND_HANDLE,
+        # --- provenance ---
         "kind": primary["kind"],
         "source": primary["source"],
         "url": primary["url"],
