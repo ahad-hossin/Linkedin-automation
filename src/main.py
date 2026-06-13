@@ -86,10 +86,16 @@ def generate() -> int:
         cluster = item["cluster"]
         primary = cluster[0]
         body_text, image_url = "", ""
-        if primary["kind"] == "news":  # arXiv abstract already in description
+        # Google News links go to a redirect/consent page whose og:image is just
+        # the Google News logo and whose body is consent boilerplate — skip it and
+        # rely on the RSS snippet + a topical photo. arXiv abstracts are already
+        # in the candidate description, so they don't need an article fetch either.
+        is_gnews = (primary.get("source_id", "").startswith("gnews")
+                    or "news.google.com" in primary.get("url", ""))
+        if primary["kind"] == "news" and not is_gnews:
             art = article.fetch_article(primary["url"])
             body_text, image_url = art["text"], art["image"]
-        # no source image (typical for research papers) -> topical photo;
+        # no usable source image (research, Google News) -> topical photo;
         # the slide design falls back to a branded backdrop if this is empty too
         if not image_url:
             image_url = images.search(primary.get("topic", ""))
