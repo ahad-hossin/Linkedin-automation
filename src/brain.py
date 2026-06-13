@@ -104,23 +104,16 @@ _COMPOSE_SCHEMA = {
         "headline": {"type": "string", "description": "the on-image headline. For 'article': the main headline (max ~80 chars, Bebas Neue, will render in caps). For 'cover': the big display title (max ~60 chars)."},
         "kicker": {"type": "string", "description": "cover template only: a short ALL-CAPS lead-in line above the title, max ~38 chars (e.g. 'NEW DRIVING-SIM RESEARCH'). Empty for article."},
         "summary": {"type": "string", "description": "article template: 1-2 sentence subtext under the headline on the cover slide, max 200 chars. Also used as the dashboard card summary."},
-        "detail_slides": {
+        "details": {
             "type": "array",
-            "description": "1-3 extra carousel slides that tell the fuller story. Each has a short ALL-CAPS heading and 1-3 short paragraphs (2-3 sentences each). Put the most important facts first. Keep total readable on a phone.",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "heading": {"type": "string", "description": "short ALL-CAPS slide heading, e.g. 'WHAT THE STUDY FOUND', 'WHY IT MATTERS'"},
-                    "paragraphs": {"type": "array", "items": {"type": "string"}},
-                },
-                "required": ["heading", "paragraphs"],
-            },
+            "items": {"type": "string"},
+            "description": "the fuller story as 3-7 short standalone paragraphs (2-3 sentences each). They auto-flow onto the carousel's story slides. Put the most important facts first; for a paper give method (simulator study / field test / dataset, N participants if known), main finding, and one limitation or open question.",
         },
         "post_text": {"type": "string", "description": "the complete LinkedIn CAPTION, ready to publish: hook line, blank-line-separated short paragraphs, source credit, closing question, then 3-5 hashtags on the final line"},
         "topic": {"type": "string", "enum": ["virtual reality", "augmented reality", "driving simulation", "driver blind zone", "pedestrian safety"]},
         "relevance": {"type": "string", "enum": ["high", "medium", "off_topic"], "description": "off_topic if, on reading the full text, this is not actually about the focus areas"},
     },
-    "required": ["title", "template", "headline", "summary", "detail_slides", "post_text", "topic", "relevance"],
+    "required": ["title", "template", "headline", "summary", "details", "post_text", "topic", "relevance"],
 }
 
 _COMPOSE_PROMPT = """You create LinkedIn carousel posts for a professional working in virtual reality, augmented reality, driving simulation, driver blind zones, and pedestrian safety.
@@ -132,7 +125,7 @@ You produce TWO things for the item below: (A) the on-image carousel slide text,
 - headline: concrete and specific. Keep it short — it renders large.
 - kicker (cover only): a short ALL-CAPS category/lead-in.
 - summary (article): the second-punch detail in 1-2 sentences.
-- detail_slides: 1-3 slides, each a short ALL-CAPS heading + 1-3 short paragraphs telling the fuller story (what/who/numbers/why it matters/what's next). Most important facts first. For a research paper: method (simulator study, field test, dataset, N participants if given), main finding, one limitation/open question. Keep each paragraph phone-readable.
+- details: 3-7 short standalone paragraphs telling the fuller story (what/who/numbers/why it matters/what's next). They auto-flow onto the carousel's story slides — do NOT add slide headings. Most important facts first. For a research paper: method (simulator study, field test, dataset, N participants if given), main finding, one limitation/open question. Keep each paragraph phone-readable.
 
 (B) LinkedIn CAPTION (post_text) — structure rules (follow exactly):
 - Line 1: a strong, specific hook — the most striking finding, number or tension in one sentence (max ~140 chars). It must work alone, because it's all people see before "...see more". Never start with "I'm excited" or "Thrilled to share".
@@ -374,12 +367,7 @@ def compose_post(selected: dict, body_text: str, image_url: str = "") -> dict:
         text=text[:4500] or "(text unavailable — use only the title; keep claims minimal)",
     )
     p = _call_llm([{"text": prompt}], _COMPOSE_SCHEMA)
-    detail_slides = []
-    for d in p.get("detail_slides", [])[:3]:
-        paras = [s.strip() for s in d.get("paragraphs", []) if s.strip()][:3]
-        if paras:
-            detail_slides.append({"heading": (d.get("heading") or "DETAILS").upper()[:40],
-                                  "paragraphs": paras})
+    details = [s.strip() for s in p.get("details", []) if s and s.strip()][:10]
     return {
         "topic_key": selected["topic_key"],
         "title": p["title"][:120],
@@ -391,7 +379,7 @@ def compose_post(selected: dict, body_text: str, image_url: str = "") -> dict:
         "template": p.get("template", "article"),
         "headline": p.get("headline", p["title"])[:120],
         "kicker": (p.get("kicker") or "").upper()[:40],
-        "detail_slides": detail_slides,
+        "details": details,
         "thank_you": True,
         "image": image_url,                  # og:image / arXiv preview if any
         "image_pos": {"x": 50, "y": 50, "zoom": 100},

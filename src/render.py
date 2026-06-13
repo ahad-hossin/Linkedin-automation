@@ -53,12 +53,12 @@ if __name__ == "__main__":
     demo = {
         "id": "demo",
         "template": "cover",
-        "headline": "Apple Vision Pro: Next-gen headset",
-        "kicker": "STEP INTO THE NEXT GENERATION",
-        "summary": "Runs on visionOS with its own App Store.",
-        "detail_slides": [{"heading": "WHAT THE STUDY FOUND",
-                           "paragraphs": ["A driving-simulator trial measured blind-spot checks.",
-                                          "VR-overlay users missed 30% fewer hazards."]}],
+        "kicker": "NEW DRIVING-SIM RESEARCH",
+        "headline": "Augmented reality windshield overlays slash driver blind-spot misses by 38%",
+        "summary": "A closed-course study with 42 drivers.",
+        "details": ["Researchers instrumented test vehicles with an AR head-up display that renders pedestrians hidden behind the A-pillar.",
+                    "Across 42 participants the system reduced missed detections from 21% to 13%, a relative improvement of 38%.",
+                    "Older drivers benefited most, though the trial was on a closed course and real-world validation is still pending."],
         "thank_you": True,
     }
     print(render_post(demo))

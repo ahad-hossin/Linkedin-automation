@@ -200,6 +200,11 @@ async function renderEditor(id) {
   try { post = await loadPost(id); }
   catch { app().innerHTML = `<div class="empty"><h2>Not found</h2><a href="#/">← Back</a></div>`; return; }
 
+  // flatten any legacy detail_slides into the studio's flat details list
+  let details = post.details;
+  if (!details && Array.isArray(post.detail_slides))
+    details = post.detail_slides.flatMap(d => d.paragraphs || []);
+
   // working model (defaults fill older drafts)
   const m = {
     title: post.title || "",
@@ -207,10 +212,12 @@ async function renderEditor(id) {
     headline: post.headline || post.title || "",
     kicker: post.kicker || "",
     summary: post.summary || "",
-    detail_slides: JSON.parse(JSON.stringify(post.detail_slides || [])),
+    details: details || [],
     thank_you: post.thank_you !== false,
-    thanks_title: post.thanks_title || "THANK YOU",
-    thanks_subtitle: post.thanks_subtitle || "Follow for more on VR, AR and road safety.",
+    thanks_title: post.thanks_title || "Thank you",
+    thanks_brand: post.thanks_brand || "Meta Life AI",
+    thanks_at: post.thanks_at || "@metaLifeAI",
+    thanks_follow: post.thanks_follow || "Follow us for more\nnews and updates of our work",
     image: post.image || "",
     image_pos: post.image_pos || { x: 50, y: 50, zoom: 100 },
     handle: post.handle || "metalifeai.com",
@@ -256,15 +263,19 @@ async function renderEditor(id) {
           <label class="rng">Zoom <input id="f-pz" type="range" min="100" max="250" value="${m.image_pos.zoom}"></label>
         </div>
 
-        <label class="field" style="display:flex;justify-content:space-between;align-items:center">
-          Detail slides <button id="btn-addslide" class="btn ghost" style="padding:4px 12px">+ Add</button>
-        </label>
-        <div id="detail-list"></div>
+        <label class="field">Full details <small style="font-weight:400;color:var(--muted)">— one paragraph per blank line; auto-flows onto story slides</small></label>
+        <textarea id="f-details" style="min-height:160px" placeholder="Paste the full story — paragraphs flow onto extra carousel slides…">${esc((m.details||[]).join("\n\n"))}</textarea>
 
         <label class="checkbox" style="margin-top:14px"><input id="f-ty" type="checkbox" ${m.thank_you?'checked':''}/> Thank-you end slide</label>
         <div id="fld-thanks" style="${m.thank_you?'':'display:none'}">
-          <input id="f-tytitle" type="text" value="${escAttr(m.thanks_title)}" style="margin-top:8px" />
-          <input id="f-tysub" type="text" value="${escAttr(m.thanks_subtitle)}" style="margin-top:8px" />
+          <label class="field">Thank-you title</label>
+          <input id="f-tytitle" type="text" value="${escAttr(m.thanks_title)}" />
+          <label class="field">Brand name</label>
+          <input id="f-tybrand" type="text" value="${escAttr(m.thanks_brand)}" />
+          <label class="field">@handle</label>
+          <input id="f-tyat" type="text" value="${escAttr(m.thanks_at)}" />
+          <label class="field">Follow line</label>
+          <textarea id="f-tyfollow" style="min-height:60px">${esc(m.thanks_follow)}</textarea>
         </div>
 
         <label class="field">Footer handle</label>
@@ -306,29 +317,27 @@ async function renderEditor(id) {
   const $ = s => document.getElementById(s);
   const edStatus = (t) => $("ed-status").textContent = t;
 
+  let refreshT;
   function refresh() {
-    // slide previews
-    const slides = window.MLSlides.postToSlides(m);
-    $("slides-preview").innerHTML = slides.map((s, i) =>
-      `<div class="slide-scale"><div class="ml-slide">${window.MLSlides.mlSlideMarkup(s, {handle: m.handle})}</div>
-        <span class="slide-num">${i + 1}</span></div>`).join("");
-    // caption
     $("pv-body").textContent = m.post_text;
     $("cc").textContent = m.post_text.length;
-  }
-
-  function renderDetailList() {
-    $("detail-list").innerHTML = m.detail_slides.map((d, i) => `
-      <div class="detail-card" data-i="${i}">
-        <div class="row" style="justify-content:space-between">
-          <input class="d-head" data-i="${i}" type="text" value="${escAttr(d.heading||'')}" placeholder="SLIDE HEADING" style="font-weight:600"/>
-          <button class="btn ghost d-del" data-i="${i}" style="padding:4px 10px">✕</button>
-        </div>
-        <textarea class="d-paras" data-i="${i}" style="min-height:90px;margin-top:6px" placeholder="One paragraph per blank line…">${esc((d.paragraphs||[]).join("\n\n"))}</textarea>
-      </div>`).join("") || `<p class="hint">No detail slides. Add one to expand the story.</p>`;
-    $("detail-list").querySelectorAll(".d-head").forEach(el => el.oninput = () => { m.detail_slides[+el.dataset.i].heading = el.value; refresh(); });
-    $("detail-list").querySelectorAll(".d-paras").forEach(el => el.oninput = () => { m.detail_slides[+el.dataset.i].paragraphs = el.value.split(/\n{2,}/).map(s=>s.trim()).filter(Boolean); refresh(); });
-    $("detail-list").querySelectorAll(".d-del").forEach(el => el.onclick = () => { m.detail_slides.splice(+el.dataset.i,1); renderDetailList(); refresh(); });
+    // debounce: pagination + autofit measure the live DOM, so coalesce keystrokes
+    clearTimeout(refreshT);
+    refreshT = setTimeout(() => {
+      const wrap = $("slides-preview");
+      // render directly into the (attached) container so measuring works,
+      // then wrap each full-size slide in a CSS scaler with a number badge
+      window.MLSlides.renderInto(wrap, m, { handle: m.handle });
+      [...wrap.querySelectorAll(":scope > .ml-slide")].forEach((el, i) => {
+        const box = document.createElement("div");
+        box.className = "slide-scale";
+        wrap.insertBefore(box, el);
+        box.appendChild(el);
+        const n = document.createElement("span");
+        n.className = "slide-num"; n.textContent = i + 1;
+        box.appendChild(n);
+      });
+    }, 80);
   }
 
   // template toggle
@@ -346,8 +355,11 @@ async function renderEditor(id) {
   $("f-kicker").oninput = e => { m.kicker = e.target.value; refresh(); };
   $("f-summary").oninput = e => { m.summary = e.target.value; refresh(); };
   $("f-handle").oninput = e => { m.handle = e.target.value; refresh(); };
+  $("f-details").oninput = e => { m.details = e.target.value.split(/\n{2,}/).map(s => s.trim()).filter(Boolean); refresh(); };
   $("f-tytitle").oninput = e => { m.thanks_title = e.target.value; refresh(); };
-  $("f-tysub").oninput = e => { m.thanks_subtitle = e.target.value; refresh(); };
+  $("f-tybrand").oninput = e => { m.thanks_brand = e.target.value; refresh(); };
+  $("f-tyat").oninput = e => { m.thanks_at = e.target.value; refresh(); };
+  $("f-tyfollow").oninput = e => { m.thanks_follow = e.target.value; refresh(); };
   $("f-ty").onchange = e => { m.thank_you = e.target.checked; $("fld-thanks").style.display = e.target.checked ? "" : "none"; refresh(); };
 
   // image
@@ -362,9 +374,6 @@ async function renderEditor(id) {
   $("f-px").oninput = e => { m.image_pos.x = +e.target.value; refresh(); };
   $("f-py").oninput = e => { m.image_pos.y = +e.target.value; refresh(); };
   $("f-pz").oninput = e => { m.image_pos.zoom = +e.target.value; refresh(); };
-
-  // detail add
-  $("btn-addslide").onclick = () => { m.detail_slides.push({ heading: "DETAILS", paragraphs: [""] }); renderDetailList(); refresh(); };
 
   // caption
   $("f-text").oninput = e => { m.post_text = e.target.value; refresh(); };
@@ -406,8 +415,8 @@ async function renderEditor(id) {
     } catch (e) { edStatus(e.message); toast(e.message, "err"); }
   };
 
-  renderDetailList();
   refresh();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh); // re-fit once slide fonts load
   setPill(`Editing · ${titleCase(post.status)}`);
 }
 
