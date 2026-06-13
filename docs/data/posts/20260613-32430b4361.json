@@ -1,0 +1,42 @@
+{
+ "id": "20260613-32430b4361",
+ "title": "Dynisma DMG-S Compact Driving Simulator",
+ "summary": "",
+ "topic": "driving simulation",
+ "kind": "news",
+ "source": "Google News",
+ "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPZnNMR3J5bkp4aFk4UnJQV0VRQ3hLT0N1ZHprNjFCeHZld1N3X2xYYmhnNEY5cmJBSkZIandGMWhkc29IaEpGQ0gtNnJQUEtsd2EwUmoxQ1FSTzRZOVQzbkZnQ1MwbTNJQml6TnVOOTIwSlZuWkZ4dmtqa2N4RGsyU201Q2ZFQzIxVUZRaW5MWWt4U2NuVFgzLQ?oc=5",
+ "post_text": "A professional-grade motion simulator no longer requires a massive dedicated facility.\n\nDynisma has unveiled the DMG-S, a compact driving simulator designed for high-fidelity vehicle dynamics in a smaller footprint.\n\nAccording to Eureka Magazine, the system focuses on bringing realistic physical feedback to environments where space and power are constrained.\n\nThis shift toward compact, high-fidelity hardware lowers the entry barrier for smaller research institutions and engineering firms.\n\nIt allows for more frequent and precise driver-in-the-loop testing for ADAS and autonomous vehicle development without the need for full-scale infrastructure.\n\nWhat stands out to me is the ability to integrate professional motion cues into standard professional environments, potentially accelerating the iterative design cycle for safety systems.\n\nHow do you balance the trade-off between simulator footprint and motion fidelity in your testing workflows?\n\n#DrivingSimulation #ADAS #VehicleDynamics #HumanFactors #AutomotiveEngineering",
+ "template": "cover",
+ "headline": "Dynisma Unveils DMG-S Compact Simulator",
+ "kicker": "NEW HARDWARE LAUNCH",
+ "details": [
+  "Dynisma has introduced the DMG-S, a new compact driving simulator designed to bring high-fidelity motion and simulation capabilities to a smaller footprint.",
+  "The system is engineered to provide realistic physical feedback and vehicle dynamics, allowing for professional-grade testing and development in a constrained space.",
+  "The compact design aims to reduce the cost and entry barrier for smaller firms and research institutions that previously required massive infrastructure for full-scale motion platforms.",
+  "By integrating advanced motion cues, the the DMG-S enables more accurate driver-in-the-loop testing for ADAS and autonomous vehicle development.",
+  "A key focus for the simulator is the efficiency of space and power, making it easier to deploy in various professional environments without specialized facility requirements."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "Luminous flat-vector illustration of a compact driving simulator cockpit, deep-navy background with purple, magenta, and teal gradients. Glowing abstract human forms interacting with a steering wheel and pedals, minimal geometric faces with tiny square pixel eyes, thin connecting lines and rounded-square icon chips orbiting the simulator seat. 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "Cinematic 3D scene of a small silhouetted human figure standing before large translucent floating UI panels displaying vehicle dynamics charts and telemetry in neon purple-magenta-orange. In the center, a sleek compact driving simulator cockpit on a dark stage with a faint grid floor, strong depth and perspective. 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "World-as-data scene featuring a glowing neon-green LiDAR point-cloud mesh overlaying a realistic driving simulator cockpit and a virtual road. High-contrast sensor-simulation feel on a near-black background, showing the digital-twin relationship between the simulator and the physical vehicle. 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-13T06:13:13Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}

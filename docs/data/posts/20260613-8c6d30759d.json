@@ -1,0 +1,43 @@
+{
+ "id": "20260613-8c6d30759d",
+ "title": "Valve Steam Frame Launch",
+ "summary": "",
+ "topic": "virtual reality",
+ "kind": "news",
+ "source": "Road to VR",
+ "url": "https://roadtovr.com/valve-steam-frame-imported-us-release/",
+ "post_text": "Valve is moving 35 tons of VR hardware into US warehouses.\n\nThe Steam Frame is officially arriving.\n\nAccording to import records spotted by analyst Brad Lynch, Valve has begun importing large quantities of VR devices to prepare for a summer launch.\n\nThis isn't just another standalone headset. The Steam Frame combines a Snapdragon 8 Gen 3 chipset with a Linux-based SteamOS, allowing it to run Windows games via the Proton compatibility layer.\n\nHardware specs are high-end: dual 2,160 x 2,160 per-eye LCDs, 144 Hz refresh rates, and integrated eye-tracking.\n\nFor professionals, the most interesting detail is Valve's openness to bringing SteamOS to third-party headsets, potentially shifting how we handle VR OS ecosystems.\n\nWhile pricing remains the biggest question due to component costs, the ability to stream a full Steam library wirelessly suggests a significant push toward high-fidelity portable VR.\n\nHow will a Linux-based, open-ecosystem approach to VR hardware impact the development of professional simulation tools?\n\n#VirtualReality #Valve #SteamFrame #SteamOS #XRHardware",
+ "template": "cover",
+ "headline": "STEAM FRAME IS ARRIVING",
+ "kicker": "NEW HARDWARE LAUNCH",
+ "details": [
+  "Import records show Valve has moved approximately 32,000 kg of virtual reality devices into US warehouses, signaling an imminent launch of the Steam Frame standalone headset.",
+  "The device features dual 2,160 x 2,160 per-eye LCD displays with a 144 Hz refresh rate, eye-tracking, and optical inside-out tracking.",
+  "Powered by a Snapdragon 8 Gen 3 chipset, the headset supports standalone mode and wireless PC tethering for low-latency game streaming.",
+  "Running on a Linux-based SteamOS with a Proton compatibility layer, it can natively run games originally designed for Windows.",
+  "Valve has confirmed that both the Steam Frame and the accompanying Steam Machine console will be released this summer.",
+  "A key remaining uncertainty is the final pricing, which may be affected by ongoing component costs for RAM and storage."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://roadtovr.com/wp-content/uploads/2025/11/steam-frame-2.jpg",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "Luminous flat-vector illustration of a sleek, futuristic VR headset floating in the center. Deep-navy background with purple, magenta, and teal gradients. Glowing abstract human head silhouette wearing the device, minimal geometric faces with tiny square pixel eyes, thin connecting lines and rounded-square icon chips orbiting the headset. 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "Cinematic 3D scene of a small silhouetted human figure standing on a dark stage with a faint grid floor. The figure is facing massive, translucent floating UI panels and system dashboards in neon purple, magenta, and orange, displaying VR hardware specifications and system architecture. Strong depth and perspective. 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "World-as-data scene showing a glowing neon-green wireframe and LiDAR point-cloud of a high-tech warehouse interior. Digital-twin feel with crates and hardware silhouettes outlined in glowing green mesh on a near-black background, simulating a sensor-driven logistics environment. 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-13T06:12:54Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}
