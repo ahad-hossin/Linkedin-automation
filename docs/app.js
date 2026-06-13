@@ -302,14 +302,31 @@ async function renderEditor(id) {
         </p>
       </div>
 
-      <div class="panel">
-        <h2>Carousel preview</h2>
-        <div id="slides-preview" class="slides-preview"></div>
-        <h2 style="margin-top:20px">Caption</h2>
-        <div class="li-preview">
-          <div class="li-head"><div class="li-avatar">in</div>
-            <div><div class="li-name">Your Name</div><div class="li-sub">VR / Road-safety · Now</div></div></div>
-          <div class="li-body" id="pv-body"></div>
+      <div class="panel li-panel">
+        <h2>LinkedIn preview</h2>
+        <div class="li-card">
+          <div class="li-top">
+            <div class="li-avatar">in</div>
+            <div class="li-meta">
+              <div class="li-name">Your Name <span class="li-deg">· 1st</span></div>
+              <div class="li-sub">VR · AR · Road-safety</div>
+              <div class="li-sub li-time">Now · 🌐</div>
+            </div>
+            <div class="li-more-dots">···</div>
+          </div>
+          <div class="li-caption" id="pv-caption"></div>
+          <button class="li-seemore" id="li-seemore" hidden>…more</button>
+          <div class="li-carousel" id="li-carousel">
+            <div class="li-track" id="li-track"></div>
+            <button class="li-nav li-prev" id="li-prev" aria-label="Previous">‹</button>
+            <button class="li-nav li-next" id="li-next" aria-label="Next">›</button>
+            <span class="li-count" id="li-count">1 / 1</span>
+          </div>
+          <div class="li-dots" id="li-dots"></div>
+          <div class="li-stats"><span>👍❤️💡 128</span><span>24 comments · 9 reposts</span></div>
+          <div class="li-actions">
+            <span>👍 Like</span><span>💬 Comment</span><span>🔁 Repost</span><span>➤ Send</span>
+          </div>
         </div>
       </div>
     </div>`;
@@ -317,27 +334,66 @@ async function renderEditor(id) {
   const $ = s => document.getElementById(s);
   const edStatus = (t) => $("ed-status").textContent = t;
 
+  let carIndex = 0;       // current carousel slide
+  let carCount = 1;
+
+  function renderCaption() {
+    const cap = $("pv-caption");
+    cap.textContent = m.post_text;
+    if (!cap.classList.contains("expanded")) cap.classList.add("clamp");
+    // LinkedIn collapses long captions behind "…more"
+    requestAnimationFrame(() => {
+      const overflowing = cap.scrollHeight > cap.clientHeight + 2;
+      $("li-seemore").hidden = cap.classList.contains("expanded") || !overflowing;
+    });
+  }
+
   let refreshT;
   function refresh() {
-    $("pv-body").textContent = m.post_text;
+    renderCaption();
     $("cc").textContent = m.post_text.length;
     // debounce: pagination + autofit measure the live DOM, so coalesce keystrokes
     clearTimeout(refreshT);
-    refreshT = setTimeout(() => {
-      const wrap = $("slides-preview");
-      // render directly into the (attached) container so measuring works,
-      // then wrap each full-size slide in a CSS scaler with a number badge
-      window.MLSlides.renderInto(wrap, m, { handle: m.handle });
-      [...wrap.querySelectorAll(":scope > .ml-slide")].forEach((el, i) => {
-        const box = document.createElement("div");
-        box.className = "slide-scale";
-        wrap.insertBefore(box, el);
-        box.appendChild(el);
-        const n = document.createElement("span");
-        n.className = "slide-num"; n.textContent = i + 1;
-        box.appendChild(n);
-      });
-    }, 80);
+    refreshT = setTimeout(buildCarousel, 80);
+  }
+
+  // build the swipeable LinkedIn-style carousel from the rendered slides
+  function buildCarousel() {
+    const track = $("li-track");
+    const carousel = $("li-carousel");
+    window.MLSlides.renderInto(track, m, { handle: m.handle });
+    const slides = [...track.querySelectorAll(":scope > .ml-slide")];
+    carCount = slides.length || 1;
+    if (carIndex >= carCount) carIndex = carCount - 1;
+    // size each slide to the (square) carousel viewport and scale the 1080 art
+    const vw = carousel.clientWidth || 440;
+    const scale = vw / 1080;
+    track.style.width = (vw * carCount) + "px";
+    slides.forEach(el => {
+      const cell = document.createElement("div");
+      cell.className = "li-cell";
+      cell.style.width = cell.style.height = vw + "px";
+      el.style.transform = `scale(${scale})`;
+      el.style.transformOrigin = "top left";
+      track.insertBefore(cell, el);
+      cell.appendChild(el);
+    });
+    carousel.style.height = vw + "px";
+    // dots
+    $("li-dots").innerHTML = slides.map((_, i) =>
+      `<span class="li-dot${i === carIndex ? " on" : ""}" data-i="${i}"></span>`).join("");
+    $("li-dots").querySelectorAll(".li-dot").forEach(d => d.onclick = () => goTo(+d.dataset.i));
+    goTo(carIndex);
+  }
+
+  function goTo(i) {
+    carIndex = Math.max(0, Math.min(carCount - 1, i));
+    const vw = $("li-carousel").clientWidth || 440;
+    $("li-track").style.transform = `translateX(${-carIndex * vw}px)`;
+    $("li-count").textContent = `${carIndex + 1} / ${carCount}`;
+    $("li-prev").classList.toggle("hide", carIndex === 0);
+    $("li-next").classList.toggle("hide", carIndex === carCount - 1);
+    $("li-dots").querySelectorAll(".li-dot").forEach((d, k) => d.classList.toggle("on", k === carIndex));
   }
 
   // template toggle
@@ -380,6 +436,28 @@ async function renderEditor(id) {
   $("f-link").onchange = e => { m.attach_link = e.target.checked; };
   $("btn-polish").onclick = () => runPolish("");
   $("btn-translate").onclick = () => runPolish("The text may be in another language; translate it to English.");
+  $("li-seemore").onclick = () => { $("pv-caption").classList.add("expanded"); $("pv-caption").classList.remove("clamp"); $("li-seemore").hidden = true; };
+
+  // carousel navigation: arrows, swipe/drag, keyboard
+  $("li-prev").onclick = () => goTo(carIndex - 1);
+  $("li-next").onclick = () => goTo(carIndex + 1);
+  let dragX = null, dragStart = 0;
+  const car = $("li-carousel");
+  car.addEventListener("pointerdown", e => { dragX = e.clientX; dragStart = carIndex; car.setPointerCapture(e.pointerId); });
+  car.addEventListener("pointermove", e => {
+    if (dragX === null) return;
+    const vw = car.clientWidth || 440;
+    const dx = e.clientX - dragX;
+    $("li-track").style.transform = `translateX(${-dragStart * vw + dx}px)`;
+  });
+  const endDrag = e => {
+    if (dragX === null) return;
+    const dx = e.clientX - dragX; dragX = null;
+    if (Math.abs(dx) > 50) goTo(dragStart + (dx < 0 ? 1 : -1)); else goTo(dragStart);
+  };
+  car.addEventListener("pointerup", endDrag);
+  car.addEventListener("pointercancel", endDrag);
+  let rsT; window.addEventListener("resize", () => { clearTimeout(rsT); rsT = setTimeout(buildCarousel, 150); });
 
   async function runPolish(instruction) {
     edStatus("Polishing with Gemini…");

@@ -13,7 +13,7 @@ import sys
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-from . import article, brain, budget, config, feeds, state, store
+from . import article, brain, budget, config, feeds, images, state, store
 
 
 def _summary(lines: list) -> None:
@@ -89,6 +89,10 @@ def generate() -> int:
         if primary["kind"] == "news":  # arXiv abstract already in description
             art = article.fetch_article(primary["url"])
             body_text, image_url = art["text"], art["image"]
+        # no source image (typical for research papers) -> topical photo;
+        # the slide design falls back to a branded backdrop if this is empty too
+        if not image_url:
+            image_url = images.search(primary.get("topic", ""))
 
         try:
             post = brain.compose_post(item, body_text, image_url)

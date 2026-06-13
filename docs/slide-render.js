@@ -53,13 +53,23 @@
     <div style="position:absolute;left:503px;top:557px;width:74px;height:74px;border-radius:50%;background:rgb(18,19,49);display:flex;align-items:center;justify-content:center;"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" style="transform:rotate(-90deg);"><path d="M 12 4.5 L 12 19 M 5.8 13 L 12 19.2 L 18.2 13" stroke="#4CA8FF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`;
   }
 
+  // big faint goggles motif used as the no-image backdrop
+  function gogglesMotif(opacity) {
+    const gid = "bg_" + (++_uid);
+    return `<svg width="760" height="520" viewBox="0 0 44 30" style="position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);opacity:${opacity};"><defs><linearGradient id="${gid}" x1="0" y1="0" x2="44" y2="30" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0667E1"></stop><stop offset="1" stop-color="#4CA8FF"></stop></linearGradient></defs><path d="M 32.55 0.317 C 29.925 0.106 25.997 0 22.051 0 C 18.105 0 14.145 0.106 11.45 0.317 C 7.532 0.624 0 6.088 0 20.511 C 0 24.091 2.223 29.513 6.955 29.513 C 15.991 29.513 15.991 20.311 21.998 20.311 C 28.005 20.311 28.005 29.513 37.042 29.513 C 41.773 29.513 43.996 24.091 43.996 20.511 C 44 6.088 36.464 0.631 32.55 0.317 Z M 39.42 20.596 C 39.385 21.061 39.325 21.505 39.24 21.914 C 39.004 23.094 38.574 24.013 37.947 24.514 C 37.63 24.764 37.264 24.912 36.845 24.929 C 36.482 24.933 36.225 24.908 35.978 24.859 C 33.089 24.281 31.507 20.522 28.287 18.014 C 26.649 16.735 24.588 15.783 21.716 15.734 C 21.565 15.731 21.491 15.731 21.491 15.731 C 19.275 15.731 17.619 16.506 16.241 17.601 C 14.29 19.159 12.895 21.368 11.256 22.953 C 10.08 24.091 8.776 24.908 7.043 24.929 C 6.976 24.929 6.976 24.929 6.976 24.929 C 6.863 24.929 6.757 24.915 6.652 24.894 C 5.672 24.672 5.02 23.457 4.717 21.72 C 4.661 21.392 4.615 21.047 4.584 20.684 C 4.164 15.96 5.877 8.614 9.988 5.757 C 10.499 5.401 11.048 5.112 11.637 4.911 C 13.293 4.34 30.436 4.291 32.381 4.911 C 32.754 5.042 32.948 5.123 33.135 5.218 C 34.019 5.655 34.819 6.335 35.53 7.18 C 36.908 8.825 37.947 11.101 38.61 13.476 C 39.3 15.946 39.582 18.517 39.42 20.596 Z" fill="url(#${gid})" fill-rule="evenodd"></path></svg>`;
+  }
+
   function imageArea(image, pos) {
     pos = pos || { x: 50, y: 50, zoom: 100 };
     if (image) {
       const scale = (pos.zoom || 100) / 100;
-      return `<div style="position:absolute;left:0;top:0;width:1080px;height:662px;overflow:hidden;background:#0b0c20;"><img src="${esc(image)}" crossorigin="anonymous" style="width:1080px;height:662px;object-fit:cover;object-position:${pos.x}% ${pos.y}%;transform:scale(${scale});transform-origin:${pos.x}% ${pos.y}%;"/></div>`;
+      return `<div style="position:absolute;left:0;top:0;width:1080px;height:662px;overflow:hidden;background:#0b0c20;"><img src="${esc(image)}" style="width:1080px;height:662px;object-fit:cover;object-position:${pos.x}% ${pos.y}%;transform:scale(${scale});transform-origin:${pos.x}% ${pos.y}%;"/></div>`;
     }
-    return `<div style="position:absolute;left:0;top:0;width:1080px;height:662px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(45deg,#1a2040 0px,#1a2040 18px,#151a36 18px,#151a36 36px);"><span style="font-family:Poppins,sans-serif;font-size:22px;font-weight:500;letter-spacing:0.14em;color:#6e76a3;background:rgba(11,12,32,0.6);padding:13px 24px;border-radius:8px;">PASTE LINK OR UPLOAD IMAGE</span></div>`;
+    // no image: an intentional branded backdrop (not an editor placeholder)
+    return `<div style="position:absolute;left:0;top:0;width:1080px;height:662px;overflow:hidden;background:radial-gradient(120% 90% at 50% 12%, #1b2350 0%, #11163a 45%, #0b0c20 100%);">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(125deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 2px, transparent 2px, transparent 26px);"></div>
+      ${gogglesMotif(0.10)}
+    </div>`;
   }
 
   // ---- slide markup (innerHTML of a 1080×1080 .ml-slide) ----------------

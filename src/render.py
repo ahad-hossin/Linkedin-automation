@@ -38,7 +38,18 @@ def render_post(post: dict) -> list:
         # wait for build() and web fonts (Anton/Bebas Neue/Poppins) to settle
         page.wait_for_function("window.__SLIDES_READY__ === true", timeout=15000)
         page.evaluate("document.fonts && document.fonts.ready")
-        page.wait_for_timeout(600)
+        # wait for every slide image (remote photos) to finish loading, else the
+        # screenshot captures an empty image area
+        page.evaluate(
+            """async () => {
+                await Promise.all([...document.images].map(img =>
+                    img.complete ? null : new Promise(res => {
+                        img.onload = img.onerror = res;
+                        setTimeout(res, 8000);  // never hang on a dead URL
+                    })));
+            }"""
+        )
+        page.wait_for_timeout(400)
         slides = page.query_selector_all(".ml-slide")
         for i, el in enumerate(slides):
             path = os.path.join(OUTPUT_DIR, f"{pid}-{i + 1}.png")
