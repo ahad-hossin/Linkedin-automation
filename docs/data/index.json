@@ -1,1 +1,28 @@
-[]
+[
+ {
+  "id": "20260613-6344878520",
+  "title": "Dash2Sim: Closed-Loop Driving Simulation from Dashcam Videos",
+  "summary": "This new framework transforms in-the-wild monocular dashcam footage into metric, geo-referenced 4D driving logs, enabling closed-loop simulations from diverse, real-world scenarios.",
+  "topic": "driving simulation",
+  "kind": "research",
+  "source": "arXiv",
+  "url": "https://arxiv.org/abs/2606.07366v1",
+  "status": "draft",
+  "created_at": "2026-06-13T04:05:51Z",
+  "posted_at": "",
+  "linkedin_url": ""
+ },
+ {
+  "id": "20260613-3d987ca3c7",
+  "title": "PersonaDrive: Human-Style VLA Agents for Driving Simulation",
+  "summary": "This new research introduces PersonaDrive, a pipeline that conditions vision-language-action (VLA) driving agents to exhibit diverse, human-like driving styles in closed-loop simulators.",
+  "topic": "driving simulation",
+  "kind": "research",
+  "source": "arXiv",
+  "url": "https://arxiv.org/abs/2606.12616v1",
+  "status": "draft",
+  "created_at": "2026-06-13T04:05:42Z",
+  "posted_at": "",
+  "linkedin_url": ""
+ }
+]
