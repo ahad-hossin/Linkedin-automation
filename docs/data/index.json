@@ -1,1 +1,28 @@
-[]
+[
+ {
+  "id": "20260613-697c2f3215",
+  "title": "FreqKD: Frequency-Decoupled Knowledge Distillation for Infrared Object Detection",
+  "summary": "New research proposes FreqKD, a method that addresses challenges in transferring knowledge from RGB to infrared imagery by decoupling distillation based on spatial frequencies, improving object detection.",
+  "topic": "driving simulation",
+  "kind": "research",
+  "source": "arXiv",
+  "url": "https://arxiv.org/abs/2606.11572v1",
+  "status": "draft",
+  "created_at": "2026-06-13T03:07:29Z",
+  "posted_at": "",
+  "linkedin_url": ""
+ },
+ {
+  "id": "20260613-3d987ca3c7",
+  "title": "PersonaDrive: Human-Style AI Drivers for Closed-Loop Simulation",
+  "summary": "A new pipeline addresses the challenge of generic non-ego traffic in closed-loop driving simulators by conditioning Vision-Language-Action (VLA) agents on explicit human driving styles.",
+  "topic": "driving simulation",
+  "kind": "research",
+  "source": "arXiv",
+  "url": "https://arxiv.org/abs/2606.12616v1",
+  "status": "draft",
+  "created_at": "2026-06-13T03:07:17Z",
+  "posted_at": "",
+  "linkedin_url": ""
+ }
+]
