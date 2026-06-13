@@ -1,18 +1,5 @@
 [
  {
-  "id": "20260613-aad4ed9d14",
-  "title": "Controlling Extreme Events in Neuronal Networks",
-  "summary": "A study reveals that a single driving signal can effectively suppress extreme events in neuronal networks across various configurations.",
-  "topic": "augmented reality",
-  "kind": "research",
-  "source": "arXiv",
-  "url": "https://arxiv.org/abs/2602.01234",
-  "status": "draft",
-  "created_at": "2026-06-13T05:33:48Z",
-  "posted_at": "",
-  "linkedin_url": ""
- },
- {
   "id": "20260613-697c2f3215",
   "title": "FreqKD: Frequency-Decoupled Knowledge Distillation for IR Object Detection",
   "summary": "A new approach, FreqKD, tackles the challenge of transferring knowledge from RGB to infrared imagery for object detection. It decouples knowledge distillation by spatial frequency, recognizing varying alignment across low and high-frequency components.",
