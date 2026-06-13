@@ -259,5 +259,41 @@
   "source": "Google News",
   "status": "drafted",
   "at": "2026-06-13T12:54:53Z"
+ },
+ {
+  "title_hash": "75bd5a5c9bed3549",
+  "url": "https://arxiv.org/abs/2606.09700v1",
+  "headline": "Human Perception vs. AI in Content Moderation",
+  "topic": "driver_blind_zone_research",
+  "source": "arXiv",
+  "status": "drafted",
+  "at": "2026-06-13T15:04:56Z"
+ },
+ {
+  "title_hash": "6437d72ebd897b45",
+  "url": "https://arxiv.org/abs/2606.06828v1",
+  "headline": "Human Perception vs. AI in Content Moderation",
+  "topic": "driver_blind_zone_research",
+  "source": "arXiv",
+  "status": "drafted",
+  "at": "2026-06-13T15:04:56Z"
+ },
+ {
+  "title_hash": "c3f667197a4d6479",
+  "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNYXhma3puSURXZjA3anJNcHotc0x2eFB5LVdZMEJueXdxdGstMGNWejRHN2N1QUl0NExYVjhCS3otcmxGZjFKdVF4Yl9aeFFaamFWR3JBd3ZmV3NNc3Q2YWRIeUdVc3JGb2pmaDFxTnlCRExfZkM5dmpPTGs2dTBuc1F3dEhHSW15Z25NV2FINktOd2lhR0k0czUzN2h3RnpXOElaWmlkOWRGMFVNMzZncHNn0gG3AUFVX3lxTFAxMmhqMGdRMmZReEQ2bXJaWmp5Z1AyYUs0U3ZEQjljSjZid2JzWWpoaTFZbUdsdVgxVlhMNDVIdGE3MEFWZmZUVGs3ZEtQNEhscVA4X2Q2LTBJRUxHQnRpenV4MVVXaFFxLUZVY3BXdk9tTXlvMDltR3RCQ3B1VXBldVA4MzB2QnBjbTlGcGR2ZnZBbXhPSmxiMVRpSUFuUGczU1N6NDVjdHJ3NGRYTGtUQkZmSFEySQ?oc=5",
+  "headline": "Bakersfield ranked 3rd deadliest metro for pedestrians in US: report - KGET.com",
+  "topic": "pedestrian_safety_report",
+  "source": "Google News",
+  "status": "drafted",
+  "at": "2026-06-13T15:05:02Z"
+ },
+ {
+  "title_hash": "5752127f4cb18817",
+  "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPbUp5RXNEQ1pyZHN4M09ZM3lnS1FNYW56VGlrY084Q21wYnZfdGl1LTFqMU8xUklOTERsbkljOUwwZVpCYVdtRndpbjFVSGJmdFpfNUJybFJZc0l6TUFrY3VqRkVfc3RGZkMzNU16emJLaTJYNTVSdXNHcy1UMkwwMkJ6YS01OFQ0NU5aLUdfUlFfUUE0SXBaX1dSNTdQdDBKc1lDZ2F4Qk7SAbwBQVVfeXFMTjVLaTNMeVpjVWY4ZmI4YVhNYmdYWHpKMWVIVElhLUNDeDRhSGR2X1lpVGk1OEpkclhCQmZ4OEYzb3pTQ21YRzNiVFU0UUNmMS1xekRKM2taNmZRRXl3MHk1N19idWRfNUhkdFM3YldtQzU0M2szWUU2cGg2NWJqazJnaXJhVWMzbmxkUHl6Y05SUUVKcmNVRWVlbXlwVlNnR0NhUXJUcXpIc2xtSHh5czhBMXhiSHlTYms1NzA?oc=5",
+  "headline": "Bakersfield ranked 3rd deadliest metro for pedestrians in US: report - KGET.com",
+  "topic": "pedestrian_safety_report",
+  "source": "Google News",
+  "status": "drafted",
+  "at": "2026-06-13T15:05:02Z"
  }
 ]
