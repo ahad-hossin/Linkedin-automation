@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VR/AR &amp; Road-Safety — LinkedIn Post Studio</title>
-  <link rel="stylesheet" href="styles.css" />
+  <!-- load CSS cache-busted so deploys always show the latest -->
+  <script>document.write('<link rel="stylesheet" href="styles.css?v=' + Date.now() + '">');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- slide fonts (live carousel preview) -->
@@ -71,7 +72,16 @@
 
   <div id="toast" class="toast hidden"></div>
 
-  <script src="slide-render.js"></script>
-  <script src="app.js"></script>
+  <!-- load JS cache-busted, in order (slide-render before app) -->
+  <script>
+    (function () {
+      var v = "?v=" + Date.now();
+      ["slide-render.js", "app.js"].forEach(function (src) {
+        var s = document.createElement("script");
+        s.src = src + v; s.async = false;
+        document.body.appendChild(s);
+      });
+    })();
+  </script>
 </body>
 </html>
