@@ -79,5 +79,23 @@
   "source": "arXiv",
   "status": "drafted",
   "at": "2026-06-13T04:54:11Z"
+ },
+ {
+  "title_hash": "aeff4e7208c246a0",
+  "url": "https://arxiv.org/abs/2606.07366v1",
+  "headline": "Dash2Sim: Dashcam to Driving Simulation Framework",
+  "topic": "dashcam_video_driving_sim",
+  "source": "arXiv",
+  "status": "drafted",
+  "at": "2026-06-13T05:17:49Z"
+ },
+ {
+  "title_hash": "a1c2aa1a238ee87f",
+  "url": "https://arxiv.org/abs/2606.11572v1",
+  "headline": "FreqKD: Frequency-Decoupled Knowledge Distillation for IR Object Detection",
+  "topic": "infrared_object_detection_pedestrian_safety",
+  "source": "arXiv",
+  "status": "drafted",
+  "at": "2026-06-13T05:18:09Z"
  }
 ]

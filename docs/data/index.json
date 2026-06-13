@@ -1,5 +1,31 @@
 [
  {
+  "id": "20260613-697c2f3215",
+  "title": "FreqKD: Frequency-Decoupled Knowledge Distillation for IR Object Detection",
+  "summary": "A new approach, FreqKD, tackles the challenge of transferring knowledge from RGB to infrared imagery for object detection. It decouples knowledge distillation by spatial frequency, recognizing varying alignment across low and high-frequency components.",
+  "topic": "pedestrian safety",
+  "kind": "research",
+  "source": "arXiv",
+  "url": "https://arxiv.org/abs/2606.11572v1",
+  "status": "draft",
+  "created_at": "2026-06-13T05:18:09Z",
+  "posted_at": "",
+  "linkedin_url": ""
+ },
+ {
+  "id": "20260613-6344878520",
+  "title": "Dash2Sim: Dashcam to Driving Simulation Framework",
+  "summary": "A new framework, Dash2Sim, converts everyday dashcam videos into detailed 4D driving logs, enabling simulations to incorporate a far broader range of real-world scenarios, including rare events.",
+  "topic": "driving simulation",
+  "kind": "research",
+  "source": "arXiv",
+  "url": "https://arxiv.org/abs/2606.07366v1",
+  "status": "draft",
+  "created_at": "2026-06-13T05:17:49Z",
+  "posted_at": "",
+  "linkedin_url": ""
+ },
+ {
   "id": "20260613-3d987ca3c7",
   "title": "PersonaDrive Improves Human-Style Driving Simulation Performance",
   "summary": "The PersonaDrive pipeline improves closed-loop driving simulations by integrating human-style behavior, enhancing agent performance across driving styles.",
