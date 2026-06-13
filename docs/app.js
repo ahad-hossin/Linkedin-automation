@@ -338,13 +338,18 @@ async function renderEditor(id) {
   let carCount = 1;
 
   function renderCaption() {
-    const cap = $("pv-caption");
+    const cap = $("pv-caption"), btn = $("li-seemore");
     cap.textContent = m.post_text;
-    if (!cap.classList.contains("expanded")) cap.classList.add("clamp");
-    // LinkedIn collapses long captions behind "…more"
+    const expanded = cap.classList.contains("expanded");
+    cap.classList.toggle("clamp", !expanded);
+    // measure overflow against the clamped (3-line) height, then restore state,
+    // so the toggle shows "…more" when collapsed and "show less" when expanded
     requestAnimationFrame(() => {
+      cap.classList.add("clamp");
       const overflowing = cap.scrollHeight > cap.clientHeight + 2;
-      $("li-seemore").hidden = cap.classList.contains("expanded") || !overflowing;
+      cap.classList.toggle("clamp", !expanded);
+      btn.hidden = !overflowing;
+      btn.textContent = expanded ? "show less" : "…more";
     });
   }
 
@@ -436,7 +441,7 @@ async function renderEditor(id) {
   $("f-link").onchange = e => { m.attach_link = e.target.checked; };
   $("btn-polish").onclick = () => runPolish("");
   $("btn-translate").onclick = () => runPolish("The text may be in another language; translate it to English.");
-  $("li-seemore").onclick = () => { $("pv-caption").classList.add("expanded"); $("pv-caption").classList.remove("clamp"); $("li-seemore").hidden = true; };
+  $("li-seemore").onclick = () => { $("pv-caption").classList.toggle("expanded"); renderCaption(); };
 
   // carousel navigation: arrows + swipe/drag
   $("li-prev").onclick = e => { e.stopPropagation(); goTo(carIndex - 1); };
