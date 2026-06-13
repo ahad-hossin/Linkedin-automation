@@ -295,5 +295,23 @@
   "source": "Google News",
   "status": "drafted",
   "at": "2026-06-13T15:05:02Z"
+ },
+ {
+  "title_hash": "b08baed07866663b",
+  "url": "https://arxiv.org/abs/2606.09139v1",
+  "headline": "Geometric Framework for Pose and Velocity Estimation",
+  "topic": "absolute_pose_velocity_estimation_event_cameras",
+  "source": "arXiv",
+  "status": "drafted",
+  "at": "2026-06-13T16:41:46Z"
+ },
+ {
+  "title_hash": "e0cce76c3a45055f",
+  "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxORGVIQ3BueDItSi1CblhiR0NtN3p5cUNZM1pBa2dDc2ZaMGQ1RUc2c0lKR2JNZEJmV05iSjYzTm1WYTZMaW04RlFjSk5sODBKUG45akVfVmxXckxuNF9PSjkwNWJ0UzFwYmZERW5xakQ4Y2dqSmFlRmFvcThvRWNZR3ZVNWEtSENlNmwwRE9ZaDFMWUlB?oc=5",
+  "headline": "Cleveland's Pedestrian Safety Ranking",
+  "topic": "cleveland_pedestrian_safety",
+  "source": "Google News",
+  "status": "drafted",
+  "at": "2026-06-13T16:41:53Z"
  }
 ]
