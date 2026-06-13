@@ -1,0 +1,43 @@
+{
+ "id": "20260613-a29baae813",
+ "title": "St. Augustine Seawall Project Launch",
+ "summary": "The St. Augustine seawall project is set to begin on June 15, enhancing coastal resilience and safety.",
+ "topic": "pedestrian safety",
+ "kind": "news",
+ "source": "Google News",
+ "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQZ3pxUmhfT29Xbi1hX0NPaVBzOGEybE00MjRpbXJyVVU1VWQ2ZldUYjlVSlFTOUg5eWxHdU4zcy13SUw2YVYxVE1vUjBwUENPZEtqNEJxVUZjMC0xTnpwV1E0aE5fSzF0Z2haQ0g3a1NpaTlPeUwyelBhS3BiWmpJYjlGa3MzSWg5WnI5QWg3d3QwaXU5RXF1Z1lWdXlEenNDX0hQMjB6bWdHVGtsWlJLM1d0dzZ6OFphZ3VySTJsdFI3bWxoTHd6ZGFqamZRQTlYZlhLVlFzWGc?oc=5",
+ "post_text": "The St. Augustine seawall project is set to begin on June 15, focusing on enhancing coastal resilience.\n\nThis initiative aims to improve flood protection and mitigate erosion, addressing the impacts of climate change. The construction of a new seawall will provide better safety for the community and protect properties in vulnerable coastal areas.\n\nLocal authorities have highlighted the importance of this project for community safety, although there may be temporary disruptions to traffic and local businesses during construction. Community engagement is encouraged, with updates available for residents.\n\nWhat are your thoughts on the importance of seawall projects for coastal communities?\n\n#CoastalSafety #Infrastructure #ClimateChange #UrbanPlanning #CommunityEngagement",
+ "template": "article",
+ "headline": "ST. AUGUSTINE SEAWALL PROJECT LAUNCHES",
+ "kicker": "NEW INFRASTRUCTURE INITIATIVE",
+ "details": [
+  "The St. Augustine seawall project will commence on June 15, focusing on improving coastal infrastructure along A1A.",
+  "This initiative aims to enhance flood protection and mitigate erosion, addressing increasing concerns about climate change impacts.",
+  "The project will involve the construction of a new seawall designed to withstand severe weather and rising sea levels.",
+  "Local authorities emphasize the importance of this project for community safety and property protection in vulnerable coastal areas.",
+  "While the seawall is expected to provide significant benefits, there may be temporary disruptions to traffic and local businesses during construction.",
+  "Community engagement is encouraged, with updates and information available for residents to stay informed about the project's progress."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Crosswalk_of_Market_at_Third%2C_San_Francisco.jpg",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "luminous flat-vector illustration: deep-navy bg, purple->magenta->teal->orange gradients, glowing abstract seawall structures and coastal elements, minimal geometric waves with tiny square 'pixel' eyes, thin connecting lines and rounded-square icon chips orbiting a central seawall concept, 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "cinematic 3D scene: a small silhouetted human figure facing large translucent floating UI panels showing coastal data and seawall designs in neon purple-magenta-orange, dark stage, faint grid floor, strong depth and perspective, 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "world-as-data scene: glowing neon-green wireframe / point-cloud / LiDAR mesh overlaying a real coastal street with seawall structures, crosswalks, and pedestrians on near-black; high-contrast sensor-simulation / digital-twin feel, 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-13T20:22:09Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}

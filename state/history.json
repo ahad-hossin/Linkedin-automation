@@ -331,5 +331,41 @@
   "source": "Google News",
   "status": "drafted",
   "at": "2026-06-13T18:16:42Z"
+ },
+ {
+  "title_hash": "c6f6106099074d81",
+  "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQZ3pxUmhfT29Xbi1hX0NPaVBzOGEybE00MjRpbXJyVVU1VWQ2ZldUYjlVSlFTOUg5eWxHdU4zcy13SUw2YVYxVE1vUjBwUENPZEtqNEJxVUZjMC0xTnpwV1E0aE5fSzF0Z2haQ0g3a1NpaTlPeUwyelBhS3BiWmpJYjlGa3MzSWg5WnI5QWg3d3QwaXU5RXF1Z1lWdXlEenNDX0hQMjB6bWdHVGtsWlJLM1d0dzZ6OFphZ3VySTJsdFI3bWxoTHd6ZGFqamZRQTlYZlhLVlFzWGc?oc=5",
+  "headline": "St. Augustine Seawall Project Launch",
+  "topic": "vru_safety_integration",
+  "source": "Google News",
+  "status": "drafted",
+  "at": "2026-06-13T20:22:09Z"
+ },
+ {
+  "title_hash": "6c6597df4993b15d",
+  "url": "https://www.uploadvr.com/everything-announced-at-the-uploadvr-showcase-summer-2026/",
+  "headline": "St. Augustine Seawall Project Launch",
+  "topic": "vru_safety_integration",
+  "source": "Google News",
+  "status": "drafted",
+  "at": "2026-06-13T20:22:09Z"
+ },
+ {
+  "title_hash": "6c6597df4993b15d",
+  "url": "https://www.uploadvr.com/everything-announced-at-the-uploadvr-showcase-summer-2026/",
+  "headline": "Everything Announced At The UploadVR Showcase - Summer 2026",
+  "topic": "v2x_integration_pedestrian_safety",
+  "source": "UploadVR",
+  "status": "drafted",
+  "at": "2026-06-13T20:22:14Z"
+ },
+ {
+  "title_hash": "96d9e94c95f89bfd",
+  "url": "https://arxiv.org/abs/2606.08130v1",
+  "headline": "Everything Announced At The UploadVR Showcase - Summer 2026",
+  "topic": "v2x_integration_pedestrian_safety",
+  "source": "UploadVR",
+  "status": "drafted",
+  "at": "2026-06-13T20:22:14Z"
  }
 ]
