@@ -70,5 +70,14 @@
   "source": "Google News",
   "status": "drafted",
   "at": "2026-06-13T04:19:32Z"
+ },
+ {
+  "title_hash": "6c0ff3b05bb81534",
+  "url": "https://arxiv.org/abs/2606.12616v1",
+  "headline": "PersonaDrive Improves Human-Style Driving Simulation Performance",
+  "topic": "6c0ff3b05bb81534",
+  "source": "arXiv",
+  "status": "drafted",
+  "at": "2026-06-13T04:54:11Z"
  }
 ]
