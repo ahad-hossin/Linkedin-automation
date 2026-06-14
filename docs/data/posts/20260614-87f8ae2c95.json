@@ -1,0 +1,42 @@
+{
+ "id": "20260614-87f8ae2c95",
+ "title": "Dark Trip Game Update: New Room Released",
+ "summary": "The latest update to Dark Trip introduces the 15th escape room, enhancing gameplay with new puzzles and challenges.",
+ "topic": "virtual reality",
+ "kind": "news",
+ "source": "UploadVR",
+ "url": "https://www.uploadvr.com/dark-trip-gets-compartment-of-souls-major-update/",
+ "post_text": "Dark Trip just launched a major update, introducing the 15th escape room called \"Compartment of Souls.\"  \nThis update enhances gameplay with new puzzles and immersive challenges.  \nThe game has been in Early Access on Meta Quest since February 2025 and has seen continuous improvements. A closed playtest on Steam was recently made available, supporting both PC VR and flat controls.  \nIn Dark Trip, players investigate a missing person in an abandoned lab, solving puzzles and using hallucinogenic elements to alter their surroundings.  \nAs the game continues to evolve, it remains in Early Access, which may present some bugs or incomplete features.  \nWhat features do you think are essential for enhancing the escape room experience in VR?  \n#VirtualReality #Gaming #EscapeRoom #DarkTrip #GameDevelopment",
+ "template": "article",
+ "headline": "DARK TRIP ADDS NEW ESCAPE ROOM",
+ "kicker": "MAJOR GAME UPDATE",
+ "details": [
+  "Dark Trip, a psychedelic horror escape room game, has received a significant update, adding the highly anticipated 15th room, titled \"Compartment of Souls.\" This update is now live on Meta Quest, where the game has been in Early Access since February 2025.",
+  "The game has been continuously improved through updates on Meta's platform, enhancing the overall player experience. A closed playtest for the game on Steam was launched on June 4, allowing players to explore it with both PC VR support and conventional flat controls.",
+  "In Dark Trip, players assume the role of an investigator searching for a missing girl in an abandoned laboratory. The gameplay involves solving escape room-style puzzles and occasionally using pills to induce hallucinatory states that alter the environment.",
+  "This update not only expands the game's content but also aims to deepen player engagement through new challenges and immersive experiences. Dark Trip continues to evolve, with plans for future releases on SteamVR.",
+  "One limitation is that the game is still in Early Access, meaning that players may encounter bugs or incomplete features as development continues."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://storage.ghost.io/c/2a/2f/2a2f38f0-4b71-407a-9c7e-18a9e2541980/content/images/size/w1200/2026/06/DT-R15-Trailer-Thumbnail.png",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "A luminous flat-vector illustration showing a surreal escape room environment with abstract human forms and glowing puzzle elements, vibrant gradients transitioning from purple to magenta to teal to orange, creating a psychedelic atmosphere. The scene conveys a sense of mystery and exploration, with minimal geometric faces and thin connecting lines. 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "A cinematic 3D scene depicting a small silhouetted figure standing in front of large translucent UI panels displaying escape room puzzles and clues in neon purple, magenta, and orange. The dark stage creates a sense of depth and perspective, inviting the viewer into a mysterious and engaging world. 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "A 'world-as-data' scene featuring a glowing neon-green wireframe overlay of an abandoned laboratory, with digital elements representing escape room puzzles and clues. The environment is set against a near-black background, creating a high-contrast, immersive experience that feels like a digital twin of the game's setting. 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-14T00:17:11Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}
