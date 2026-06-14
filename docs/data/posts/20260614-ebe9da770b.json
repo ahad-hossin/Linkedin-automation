@@ -1,0 +1,42 @@
+{
+ "id": "20260614-ebe9da770b",
+ "title": "As pedestrian deaths decline in New Mexico, cyclist deaths double to highest number in 20 years - Albuquerque Journal",
+ "summary": "While pedestrian fatalities decrease, cyclist deaths in New Mexico have surged to a 20-year high, raising concerns about road safety.",
+ "topic": "pedestrian safety",
+ "kind": "news",
+ "source": "Google News",
+ "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNclhzYkxFV2gwcFIzWW40UEtnb25PNXJvRzZuZ1JtVFpwMXFwcXhtd29lRTVWVXlZWk5KZmM4RnljOHJoWk1xUlZ4TWNHeWVBUTlHOHpaLVQxMm0xREUzV1RSQ08wOGREVE1KNWtudnBneWJTTHRBd3VYWXIyQ3g1d3lEQnJwTFZHeVAyd0VrRFZobkNpT3l4SnZKNXhUSklQd1VJUkdMdWdXLS01ZDJ6amNZYlVxMXBzMzBJYVJicE1mRl85UzhnQ095N2ZBMTg?oc=5",
+ "post_text": "Cyclist fatalities in New Mexico have surged to a 20-year high, even as pedestrian deaths decline.\n\nThis trend raises significant concerns about road safety for cyclists. While improvements have been made for pedestrian safety, the doubling of cyclist deaths indicates a critical need for better infrastructure and protective measures.\n\nThe increase may be linked to inadequate cycling lanes and safety features, leaving cyclists vulnerable on the road. It’s essential for policymakers to address these issues to ensure that advancements in pedestrian safety do not compromise cyclist protection.\n\nWhat strategies can be implemented to enhance cyclist safety while maintaining pedestrian improvements?\n\n#RoadSafety #CyclistSafety #PedestrianSafety #UrbanPlanning #TransportationPolicy",
+ "template": "article",
+ "headline": "CYCLIST DEATHS IN NEW MEXICO DOUBLE",
+ "kicker": "PEDESTRIAN SAFETY REPORT",
+ "details": [
+  "Recent data reveals a concerning trend in New Mexico's road safety statistics. While pedestrian deaths have declined, cyclist fatalities have doubled, reaching the highest level in two decades.",
+  "This alarming increase in cyclist deaths highlights a growing issue for transportation safety advocates and policymakers. The rise indicates a potential gap in infrastructure and safety measures for cyclists.",
+  "The decline in pedestrian deaths suggests improvements in safety measures for pedestrians, but the simultaneous rise in cyclist fatalities raises questions about the effectiveness of current cycling infrastructure.",
+  "One possible factor contributing to the increase in cyclist deaths could be the lack of dedicated cycling lanes and safety features on roads, which may leave cyclists vulnerable to accidents.",
+  "This trend underscores the need for comprehensive safety strategies that address both pedestrian and cyclist safety, ensuring that improvements for one group do not inadvertently compromise the safety of the other."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Crosswalk_of_Market_at_Third%2C_San_Francisco.jpg",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "luminous flat-vector illustration: deep-navy bg, purple->magenta->teal->orange gradients, glowing abstract human forms riding bicycles, minimal geometric faces with tiny square 'pixel' eyes, thin connecting lines and rounded-square icon chips orbiting a central bicycle, 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "cinematic 3D scene: a small silhouetted human figure on a bicycle facing large translucent floating UI panels displaying road safety statistics and cyclist data in neon purple-magenta-orange, dark stage, faint grid floor, strong depth and perspective, 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "world-as-data scene: glowing neon-green wireframe overlay of a city street with cyclists and pedestrians, crosswalks, and traffic lights on near-black; high-contrast sensor-simulation feel, 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-14T05:58:40Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}
