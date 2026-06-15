@@ -1,0 +1,42 @@
+{
+ "id": "20260615-40a989b406",
+ "title": "Dubai's RTA Plans 31 New Pedestrian Bridges by 2030",
+ "summary": "The RTA has approved the construction of 31 pedestrian bridges across Dubai, enhancing safety and accessibility for pedestrians by 2030.",
+ "topic": "pedestrian safety",
+ "kind": "news",
+ "source": "Google News",
+ "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPUmhYMHphM1BULUp2Mmc3MWlxZkIyY1B1NHJ4MnJtNXVtOHYtczNVaXJCcE5UWmJDOTBhRnFBOTNrYzFGRjJ3bVdhOW1UamNvTHJKWlVBdlE4aXpENlNZd3ZRQ1BtVEpzaXVTcmVpaW9iTUJob3pHMzhBX1daNnp6VVl6WQ?oc=5",
+ "post_text": "Dubai's RTA is set to enhance pedestrian safety with 31 new bridges.\n\nThis initiative targets key areas to reduce accidents and improve accessibility for residents and visitors alike.\n\nThe project is part of a broader strategy to promote sustainable transport and ensure safe crossings in high-traffic zones. Completion is scheduled for 2030, addressing the urgent need for safer pedestrian infrastructure.\n\nOne challenge will be the integration of these bridges with existing urban layouts, which may complicate construction efforts.\n\nWhat additional measures do you think are necessary to ensure pedestrian safety in urban environments?\n\n#PedestrianSafety #UrbanPlanning #Dubai #Infrastructure #SustainableTransport",
+ "template": "article",
+ "headline": "DUBAI TO BUILD 31 PEDESTRIAN BRIDGES BY 2030",
+ "kicker": "PEDESTRIAN SAFETY INITIATIVE",
+ "details": [
+  "The Roads and Transport Authority (RTA) in Dubai has approved the construction of 31 pedestrian bridges to improve safety and accessibility in key areas of the city.",
+  "This initiative aims to reduce pedestrian accidents and enhance the overall urban mobility experience for residents and visitors.",
+  "The project is part of a broader strategy to promote sustainable transport and ensure safe crossings for pedestrians in busy urban environments.",
+  "Construction is set to be completed by 2030, with specific locations targeting high-traffic areas to maximize impact.",
+  "One potential limitation is the integration of these bridges into existing urban infrastructure, which may pose challenges during construction."
+ ],
+ "thank_you": true,
+ "thanks_title": "Thank you",
+ "thanks_brand": "Meta Life AI",
+ "thanks_at": "@metaLifeAI",
+ "thanks_follow": "Follow us for more\nnews and updates of our work",
+ "image": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Crosswalk_of_Market_at_Third%2C_San_Francisco.jpg",
+ "image_pos": {
+  "x": 50,
+  "y": 50,
+  "zoom": 100
+ },
+ "image_prompts": {
+  "gradient": "a luminous flat-vector illustration of a futuristic cityscape with glowing pedestrian bridges, deep navy background transitioning to vibrant gradients of purple, magenta, teal, and orange, abstract human figures navigating the bridges, minimal geometric faces with tiny square 'pixel' eyes, thin connecting lines, and rounded-square icon chips orbiting the central structures, 16:9 aspect ratio, ultra-detailed, no text.",
+  "panels": "a cinematic 3D scene depicting a small silhouetted human figure standing on a pedestrian bridge, facing large translucent floating UI panels displaying pedestrian safety data and urban planning charts in neon purple-magenta-orange, dark stage with a faint grid floor, strong depth and perspective, 16:9 aspect ratio, ultra-detailed, no text.",
+  "datagrid": "a 'world-as-data' scene showcasing a glowing neon-green wireframe model of a pedestrian bridge overlaid on a real street in Dubai, with crosswalks, cars, and pedestrians represented in a LiDAR mesh style on a near-black background, high-contrast sensor-simulation feel, 16:9 aspect ratio, ultra-detailed, no text."
+ },
+ "handle": "metalifeai.com",
+ "attach_link": true,
+ "status": "draft",
+ "created_at": "2026-06-15T13:23:25Z",
+ "posted_at": "",
+ "linkedin_url": ""
+}

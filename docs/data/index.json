@@ -1,5 +1,18 @@
 [
  {
+  "id": "20260615-40a989b406",
+  "title": "Dubai's RTA Plans 31 New Pedestrian Bridges by 2030",
+  "summary": "The RTA has approved the construction of 31 pedestrian bridges across Dubai, enhancing safety and accessibility for pedestrians by 2030.",
+  "topic": "pedestrian safety",
+  "kind": "news",
+  "source": "Google News",
+  "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPUmhYMHphM1BULUp2Mmc3MWlxZkIyY1B1NHJ4MnJtNXVtOHYtczNVaXJCcE5UWmJDOTBhRnFBOTNrYzFGRjJ3bVdhOW1UamNvTHJKWlVBdlE4aXpENlNZd3ZRQ1BtVEpzaXVTcmVpaW9iTUJob3pHMzhBX1daNnp6VVl6WQ?oc=5",
+  "status": "draft",
+  "created_at": "2026-06-15T13:23:25Z",
+  "posted_at": "",
+  "linkedin_url": ""
+ },
+ {
   "id": "20260615-c3fd9ce72a",
   "title": "ReactSim-Bench: Benchmarking Reactive Behavior World Model Simulation in Autonomous Driving",
   "summary": "ReactSim-Bench evaluates the reactive capability of behavior world model simulators for autonomous vehicles, addressing a key gap in existing benchmarks.",
