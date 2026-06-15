@@ -1,5 +1,31 @@
 [
  {
+  "id": "20260615-c3fd9ce72a",
+  "title": "ReactSim-Bench: Benchmarking Reactive Behavior World Model Simulation in Autonomous Driving",
+  "summary": "ReactSim-Bench evaluates the reactive capability of behavior world model simulators for autonomous vehicles, addressing a key gap in existing benchmarks.",
+  "topic": "driving simulation",
+  "kind": "research",
+  "source": "arXiv",
+  "url": "https://arxiv.org/abs/2606.14058v1",
+  "status": "draft",
+  "created_at": "2026-06-15T06:32:41Z",
+  "posted_at": "",
+  "linkedin_url": ""
+ },
+ {
+  "id": "20260615-a5702bec2b",
+  "title": "Unified Framework for Safe Autonomous Highway Driving",
+  "summary": "A new framework improves safety and efficiency in autonomous vehicle training. It combines safe distance and reward machines for better decision-making.",
+  "topic": "driving simulation",
+  "kind": "research",
+  "source": "arXiv",
+  "url": "https://arxiv.org/abs/2606.14609v1",
+  "status": "draft",
+  "created_at": "2026-06-15T06:32:33Z",
+  "posted_at": "",
+  "linkedin_url": ""
+ },
+ {
   "id": "20260614-ebe9da770b",
   "title": "As pedestrian deaths decline in New Mexico, cyclist deaths double to highest number in 20 years - Albuquerque Journal",
   "summary": "While pedestrian fatalities decrease, cyclist deaths in New Mexico have surged to a 20-year high, raising concerns about road safety.",

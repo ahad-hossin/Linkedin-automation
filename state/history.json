@@ -601,5 +601,23 @@
   "source": "Google News",
   "status": "drafted",
   "at": "2026-06-14T05:58:40Z"
+ },
+ {
+  "title_hash": "e43ea0ba7f4bb434",
+  "url": "https://arxiv.org/abs/2606.14609v1",
+  "headline": "Unified Framework for Safe Autonomous Highway Driving",
+  "topic": "safe_reinforcement_learning_highway_driving",
+  "source": "arXiv",
+  "status": "drafted",
+  "at": "2026-06-15T06:32:33Z"
+ },
+ {
+  "title_hash": "365152e298f041d0",
+  "url": "https://arxiv.org/abs/2606.14058v1",
+  "headline": "ReactSim-Bench: Benchmarking Reactive Behavior World Model Simulation in Autonomous Driving",
+  "topic": "reactsim_benchmarking_autonomous_driving",
+  "source": "arXiv",
+  "status": "drafted",
+  "at": "2026-06-15T06:32:41Z"
  }
 ]
